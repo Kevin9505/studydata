@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border: 1px solid #c0c0c0;
+            width: 500px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        th {
+            background-color: #09c;
+            font: bold 16px "微软雅黑";
+            color: #fff;
+            height: 24px;
+        }
+        td {
+            border: 1px solid #d0d0d0;
+            color: #404060;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>
+            <input type="checkbox" name="" id="checkAll"/>全选/全不选
+        </th>
+        <th>菜名</th>
+        <th>商家</th>
+        <th>价格</th>
+    </tr>
+    <tr>
+        <td>
+            <input class="ck" type="checkbox" name="check"/>
+        </td>
+        <td>红烧肉</td>
+        <td>隆江猪脚饭</td>
+        <td>￥200</td>
+    </tr>
+    <tr>
+        <td>
+            <input class="ck" type="checkbox" name="check"/>
+        </td>
+        <td>香酥排骨</td>
+        <td>隆江猪脚饭</td>
+        <td>￥998</td>
+    </tr>
+    <tr>
+        <td>
+            <input class="ck" type="checkbox" name="check"/>
+        </td>
+        <td>北京烤鸭</td>
+        <td>隆江猪脚饭</td>
+        <td>￥88</td>
+    </tr>
+</table>
+<script>
+
+    /*
+    *   需求：
+    *       1 全选多选框，如果是勾选的，下面的3个多选框也跟着勾选
+    *           如果不是勾选的，就也不勾选下面3个多选框
+    *
+    *           -- 简单说明：  下面的3个多选框的选中状态要跟上面一个一致
+    *
+    *       2 勾选下面3个多选框的时候，如果3个都勾选了，上面一个也跟着勾选，否则不勾选
+    *
+    * */
+    // 获取对象
+    var checkAll = document.getElementById("checkAll");
+    var cks = document.getElementsByClassName('ck');
+
+    // 上面一个按钮的勾选
+    checkAll.onclick = function(){
+        // 1 控制下面的3个跟我的选中状态一致
+        // 1.1 得到自身的选中状态
+        var status = checkAll.checked;
+//        console.log(status);
+//        1.2 把状态修改到下面的3个多选框身上
+        for(var i = 0; i < cks.length ; i++){
+            cks[i].checked = status;
+        }
+    }
+
+    // 下面的3个按钮的勾选
+    for(var i = 0; i < cks.length ; i++){
+        // 注册点击事件
+        cks[i].onclick = function(){
+            // 多个条件同事成立： 3个都勾选
+            /// 假设法
+            // 1 假设 3 个都勾选了
+            var flag = true;
+            // 2 找出有某一个没有勾选
+            for(var j = 0; j < cks.length ; j++){
+                //判断当前的多选框是否没有勾选
+//                if(cks[j].checked == false){
+                if(!cks[j].checked){
+                    // 3 推翻假设
+                    flag = false;
+                    break;
+                }
+            }
+            /// 4 在循环的外面再次判断，假设是否仍然成立
+//            if(flag){
+//                // 如果成立了，就是3个都勾选了，让全选也勾选
+//                checkAll.checked = true;
+//            }else{
+//                // 如果假设不成立，全选就不勾选
+//                checkAll.checked = false;
+//            }
+
+            // 语法上可以精简
+//            flag ? checkAll.checked = true:checkAll.checked = false;
+//            checkAll.checked = flag ?  true: false;
+            checkAll.checked = flag;
+        }
+    }
+
+    /*
+    *  程序写完之后，记得优化
+    *       1 精简
+    *       2 效率 -- 逻辑思维
+    * */
+</script>
+</body>
+</html>

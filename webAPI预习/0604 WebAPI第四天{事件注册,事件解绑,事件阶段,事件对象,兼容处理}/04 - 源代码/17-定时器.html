@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="停止" id="stop"/>
+<script>
+
+    /*
+    *  生活中的定时器：
+    *       闹钟，定时炸弹
+    *
+    *  网页中的定时器：
+    *       京东秒杀，轮播图
+    *
+    *
+    *  定时器：
+    *       1 一次性
+    *           setTimeout
+    *               作用是： 多少时间之后，执行一个函数一次
+    *
+    *               setTimeout(函数,延迟的毫秒时间)
+    *
+    *               如果不想让他执行了，可以清除定时器
+    *               返回值就是定时器的id
+    *
+    *               clearTimeout(定时器的id)
+    *                   停止指定id的定时器
+    *
+    *       2 无限循环
+    *
+    *           setInterval
+    *               每隔一段时间，就执行一个函数一次
+    *               返回值也是定时器id
+    *
+    *               setInterval(函数,间隔的毫秒时间)
+    *
+    *               clearInterval(定时器的id)
+    * */
+
+//    var timeoutId = setTimeout(function(){
+//        alert('BOOM')
+//    },3000);
+
+
+    document.querySelector('#stop').onclick = function(){
+        //停止定时器
+//        clearTimeout(timeoutId);
+
+        clearInterval(intervalId);
+    }
+
+//    每隔一秒输出当前的时间
+    var intervalId = setInterval(function(){
+        console.log(new Date());
+    },1000);
+
+</script>
+</body>
+</html>

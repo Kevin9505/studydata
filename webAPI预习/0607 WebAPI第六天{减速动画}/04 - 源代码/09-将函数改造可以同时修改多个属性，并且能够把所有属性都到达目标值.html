@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+        
+    </style>
+</head>
+<body>
+<input type="button" value="变胖+变高+变帅" id="btn1"/>
+<div id="box">我爱中华人民共和国</div>
+<script>
+
+    /*
+    *  第四个版本：
+    *       目标是：同时修改多个属性，都能到达目标值
+    *
+    *           上一个版，因为只要有一个到达目标，就停止了定时器，导致其他的没有到
+    *
+    *           ---》 要求所有的属性都要到达目标值 --> 多个条件同时成立  --> 反证法
+    *
+    *           反证法：
+    *               1 假设成立
+    *               2 尝试推翻
+    *               3 判断是否仍然成立
+    * */
+
+    function animate(element,obj){
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            // 1 在循环的外面假设： 假设都到达了目标值
+            var flag = true;
+            // 2 在循环内部尝试找到一个反例： 没有到达目标值的一个属性
+            for(var attr in obj){
+                //------------- 这部分是我们修改单个属性的代码----------
+                var target = obj[attr];
+                var current = parseInt(window.getComputedStyle(element)[attr]);
+                var step = (target - current) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                current += step;
+                element.style[attr] = current +'px';
+                // 如果满足条件，就是找到了一个没有到达目标值的反例
+                if(current != target){
+                    // 找到反例，推翻假设
+                    flag = false;
+                    // 需要break？不！！！！以为动画还要继续做
+                }
+                // ----------------------------------------------------
+            }
+
+            // 3 在循环外面，判断假设是否仍然成立，如果成立，就都到达目标值了，就可以停下来了
+            if(flag){
+                clearInterval(element.timer);
+            }
+        },20);
+    }
+
+    var btn1 = document.getElementById('btn1');
+
+    var box = document.getElementById('box');
+
+    btn1.onclick= function(){
+        animate(box,{
+            width: 800,
+            height: 400,
+            fontSize:100
+        });
+    }
+
+</script>
+</body>
+</html>

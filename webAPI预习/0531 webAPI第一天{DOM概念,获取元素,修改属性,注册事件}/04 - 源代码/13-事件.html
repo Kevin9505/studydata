@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="点击" id="btn"/>
+<img src="images/01.jpg" alt="" id="img"/>
+<script>
+
+    /*
+    *   交互   -- 只要有用户和浏览器的交互，就可以使用事件解决
+    *
+    *   只要是浏览器和用户交互：  事件
+    *
+    *       事件：
+    *           浏览器发生的特定的交互瞬间   --  浅显的理解
+    *
+    *           比如：
+    *               点击，输入...
+    *
+    *  使用事件的步骤：
+    *       1 注册事件
+    *           元素对象.on+事件名称 = 函数
+    *
+    *           事件源.on+事件类型 = 事件处理程序
+    *       2 触发
+    *           触发对应的事件，浏览器就会自动调用对应的事件处理程序
+    *
+    *  事件的三要素：
+    *
+    *       事件源,事件类型,事件处理程序
+    *
+    * */
+
+    /*
+    * 点击按钮的时候，切换图片的路径
+    * */
+
+    document.getElementById("btn").onclick = function(){
+        document.getElementById("img").src = 'images/02.jpg'
+    }
+
+</script>
+</body>
+</html>

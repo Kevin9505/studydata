@@ -1,0 +1,142 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        .wrapper {
+            width: 1000px;
+            height: 475px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+        .tab {
+            border: 1px solid #ddd;
+            border-bottom: 0;
+            height: 36px;
+            width: 320px;
+        }
+        .tab li {
+            position: relative;
+            float: left;
+            width: 80px;
+            height: 34px;
+            line-height: 34px;
+            text-align: center;
+            cursor: pointer;
+            border-top: 4px solid #fff;
+        }
+        .tab span {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            background: #ddd;
+            width: 1px;
+            height: 14px;
+            overflow: hidden;
+        }
+        .products {
+            width: 1002px;
+            border: 1px solid #ddd;
+            height: 476px;
+        }
+        .products .main {
+            float: left;
+            display: none;
+        }
+        .products .main.selected {
+            display: block;
+        }
+        .tab li.active {
+            border-color: red;
+            border-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <ul class="tab">
+        <li class="tab-item active">国际大牌<span>◆</span></li>
+        <li class="tab-item">国妆名牌<span>◆</span></li>
+        <li class="tab-item">清洁用品<span>◆</span></li>
+        <li class="tab-item">男士精品</li>
+    </ul>
+    <div class="products">
+        <div class="main selected">
+            <a href="###"><img src="images/guojidapai.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <a href="###"><img src="images/guozhuangmingpin.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <a href="###"><img src="images/qingjieyongpin.jpg" alt=""/></a>
+        </div>
+        <div class="main">
+            <a href="###"><img src="images/nanshijingpin.jpg" alt=""/></a>
+        </div>
+    </div>
+</div>
+<script>
+
+    /*
+    * 把鼠标移入每个分类
+    *   1 先把分类变得不同
+    *   2 找到对应的商品列表，显示
+    *
+    *
+    *   思路：
+    *       给每个分类，注册鼠标的移入事件
+    *           修改分类的样式
+    *           控制对应的商品显示和隐藏
+    * */
+
+    // 获取元素
+    var lis = document.querySelectorAll(".tab-item");
+    var goods = document.querySelectorAll(".main");
+
+    // 注册事件
+    for(var i = 0; i < lis.length ; i++){
+        // 但凡遇上索引对应的情况，都可以先把索引存起来
+        lis[i].index = i;
+        lis[i].onmouseover = function(){
+            // 1 改变分类的样式 -- 使用active这个类来控制样式的
+            // 1.1 排他的控制其他分类的样式
+            for(var j = 0; j < lis.length ; j++){
+                lis[j].className = 'tab-item';
+            }
+            // 1.2 只要给当前的分类添加active这个类，就可以了
+            this.className = 'tab-item active';
+
+
+            // 2 显示对应的商品
+            // 2.1 排他的把所有的隐藏
+            for(var j = 0; j < goods.length ; j++){
+                goods[j].className = 'main';
+            }
+            // 2.2 把当前的商品显示
+//            console.log(this);
+            /*
+            *  数量上对应，顺序也是对应的
+            *       ----->  索引对应
+            *
+            *       根据当前分类的索引，找到对应的商品的div，再显示即可
+            *
+            * */
+            // 根据索引得到对应的商品
+            var currentGood = goods[this.index];
+            currentGood.className = 'main selected';
+        }
+    }
+
+</script>
+</body>
+</html>

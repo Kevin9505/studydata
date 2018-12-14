@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="变大" id="btn"/>
+<div class="box"></div>
+<script>
+    /*
+    * 希望能够在动画执行完毕之后，去做另一件事
+    *
+    *       就可以在函数的某一特定时机，执行一个函数
+    *       因为另一件事，现在并不知道是什么事，只要把代码给我，我执行一下即可
+    *       在代码中，想把一部分代码整体的给别人--->使用函数把代码包装起来
+    *
+    *       这样就不用管想做什么事情，不用管代码是什么样的，只要在特定的时机调用这个函数即可
+    *
+    *       管这种在特定时机执行的函数：
+    *           回调函数
+    *               1 作为参数传递
+    *               2 在特定时机调用
+    * */
+
+    /**
+     * 动画函数
+     * @param element  要动的元素
+     * @param obj       属性和目标值的键值对
+     * @param callback 动画执行完毕之后要做的事情的回调函数
+     */
+    function animate_v7(element,obj,callback){
+        // 保证定时器只有一个，先把上一次的定时器清除
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            // 使用反证法，解决多属性同时到达的问题
+            var flag = true;//假设已经都成立了
+            // 尝试找出一个反例
+            for(var attr in obj){
+                // 特殊处理层级的逻辑
+                if(attr == 'zIndex'){
+                    // 层级的动画是看不见的，就不做动画了，直接把层级设置为目标值即可
+                    var target = obj[attr];
+                    // 修改回元素身上
+                    element.style[attr] = target;
+                }else
+                // 因为透明度的处理逻辑不一样，特殊处理一下
+                if(attr == 'opacity'){
+                    // 0 获取目标
+                    var target = obj[attr];
+                    // 1 获取当前的透明度
+                    var current = parseFloat(window.getComputedStyle(element)[attr])
+                    // *** 处理浮点计算的问题
+                    // *** 1 先放大
+                    target *= 100;
+                    current *= 100;
+                    // 2 修改一点点
+                    var step = (target - current) / 10;
+                    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                    current += step;
+                    // 3 修改回去
+                    element.style[attr] = current / 100;
+                    // *** 2 再取整
+                    target = Math.floor(target);
+                    current = Math.floor(current);
+                    if(current != target){
+                        flag = false;
+                    }
+                }else{
+                    // 0 把target取出来
+                    var target = obj[attr];
+                    // 1 获取当前值
+                    var current = parseInt(window.getComputedStyle(element)[attr]);
+                    // 2 修改一点
+                    var step = (target - current) / 10;
+                    // 判断方向取整
+                    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                    current += step;
+                    // 3 修改回元素的样式
+                    element.style[attr] = current + 'px';
+                    // 找反例
+                    if(current != target){
+                        // 把假设推翻
+                        flag = false;
+                    }
+                }
+            }
+            // 判断有无反例： 假设是否仍然成立
+            if(flag){
+                // 如果多个属性都到达了，就是该停止计时器的时候了
+                clearInterval(element.timer);
+
+                // 定时器清除了，动画就结束了,就按照我们想要的，调用callback
+                if(typeof callback == 'function'){callback();}
+            }
+        },20);
+    }
+
+
+    var btn = document.getElementById('btn');
+    var box = document.querySelector('.box');
+
+    btn.onclick = function(){
+        animate_v7(box,{
+            width: 300,
+            height: 250
+        },function(){
+            // 这个函数会在动画执行完毕之后，执行
+//            alert('abcde')
+
+            //希望盒子变小
+            animate_v7(box,{width: 100, height: 100},function(){
+                console.log('我曾经胖过');
+            })
+        })
+    }
+</script>
+</body>
+</html>

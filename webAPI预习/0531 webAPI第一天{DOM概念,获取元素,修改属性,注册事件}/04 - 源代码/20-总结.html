@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    /*
+    *   DOM的作用： 交互 - 操作页面上的元素 -->  对页面上的元素进行  增删改查
+    *
+    *
+    *   查：  查找
+    *
+    *       根据id
+    *           document.getElementById()  -- 只会得到一个
+    *       根据类名
+    *           document.getElementsByClassName()  -- 得到一个伪数组，不管满足条件的元素有多少个
+    *       根据标签名
+    *
+    *           document.getElementsByTagName()     - 得到伪数组
+    *
+    *
+    *           伪数组怎么用：
+    *               当初数组用，根据索引找到对应的元素，进行操作即可
+    *
+    *
+    *   改： (改属性,改样式,改内容,改位置)
+     *
+    *       改属性
+    *
+    *           1 普通属性
+    *               直接使用元素对象点即可
+    *                   div.id  div.title
+    *                   img.src
+    *                   a.href
+    *
+    *           2 特殊：
+    *               className
+    *                   对应的是元素的class属性
+    *
+    *           3 开关
+    *               获取和设置都是通过布尔类型
+    *                   ck.checked
+    *                   opt.selected
+    *                   input.disabled
+    *
+    *   事件
+    *       只要是交互都可以用事件来处理
+    *
+    *           交互的瞬间
+    *               注册
+    *                   事件源.on+事件类型 = 处理程序
+    *                   btn.onclick = function(){}
+    *               触发
+    *                   浏览器会自动调用对应事件的处理程序
+    *
+    *
+    *           今天学习的事件：
+    *               点击  click
+    *
+    *               获得焦点  focus
+    *               失去焦点  blur
+    *
+    *
+    *   讲述案例中的细节：
+    *       1 使用循环注册事件的时候，处理程序中，是不能使用循环中的i的
+    *       2 处理程序中的索引，一般会在之前先存起来，通过this得到
+    *       3 反证法
+    *
+    *
+    * */
+
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .one {
+            width: 200px;
+            height: 200px;
+            background-color: #f00;
+        }
+        .tow {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+        }
+        .p {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<input type="button" value="改变" id="btn"/>
+<div class="one p"></div>
+<div class="tow p"></div>
+<script>
+    /*
+    *  希望函数可以修改层级
+    *
+    *       层级：
+    *           数值： 整数
+    *           不带单位
+    *
+    *           跟现有逻辑都不一样，有需要单独判断
+    * */
+    function animate_v6(element,obj){
+        // 保证定时器只有一个，先把上一次的定时器清除
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            // 使用反证法，解决多属性同时到达的问题
+            var flag = true;//假设已经都成立了
+            // 尝试找出一个反例
+            for(var attr in obj){
+                // 特殊处理层级的逻辑
+                if(attr == 'zIndex'){
+                    // 层级的动画是看不见的，就不做动画了，直接把层级设置为目标值即可
+                    var target = obj[attr];
+                    // 修改回元素身上
+                    element.style[attr] = target;
+                }else
+                // 因为透明度的处理逻辑不一样，特殊处理一下
+                if(attr == 'opacity'){
+                    // 0 获取目标
+                    var target = obj[attr];
+                    // 1 获取当前的透明度
+                    var current = parseFloat(window.getComputedStyle(element)[attr])
+                    // *** 处理浮点计算的问题
+                    // *** 1 先放大
+                    target *= 100;
+                    current *= 100;
+                    // 2 修改一点点
+                    var step = (target - current) / 10;
+                    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                    current += step;
+                    // 3 修改回去
+                    element.style[attr] = current / 100;
+                    // *** 2 再取整
+                    target = Math.floor(target);
+                    current = Math.floor(current);
+                    if(current != target){
+                        flag = false;
+                    }
+                }else{
+                    // 0 把target取出来
+                    var target = obj[attr];
+                    // 1 获取当前值
+                    var current = parseInt(window.getComputedStyle(element)[attr]);
+                    // 2 修改一点
+                    var step = (target - current) / 10;
+                    // 判断方向取整
+                    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                    current += step;
+                    // 3 修改回元素的样式
+                    element.style[attr] = current + 'px';
+                    // 找反例
+                    if(current != target){
+                        // 把假设推翻
+                        flag = false;
+                    }
+                }
+            }
+            // 判断有无反例： 假设是否仍然成立
+            if(flag){
+                // 如果多个属性都到达了，就是该停止计时器的时候了
+                clearInterval(element.timer);
+            }
+        },20);
+    }
+
+    var btn = document.getElementById('btn');
+    var one = document.querySelector('.one');
+    btn.onclick = function(){
+        animate_v6(one,{
+            top:50,
+            left: 50,
+            width: 300,
+            height: 300,
+            zIndex: 5,
+            opacity: 0.5
+        });
+    }
+</script>
+</body>
+</html>

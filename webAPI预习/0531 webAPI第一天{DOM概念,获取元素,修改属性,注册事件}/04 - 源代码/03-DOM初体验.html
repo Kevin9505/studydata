@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="点击" id="btn" />
+<script>
+
+    /*
+    *   页面就是文档，把文档看成一个对象，学习该对象的属性和方法
+    *
+    * */
+
+    // 点击按钮弹出一个提示框
+    // 指挥文档对象，根据id找元素
+    //document.getElementById('btn')
+    // 再次调用对象的onclick属性，保存了一个函数
+    // 按钮.onclick = function(){}
+    document.getElementById('btn').onclick = function () {
+        alert('露露');
+    }
+    // 在点击的时候，就会执行函数里面的代码
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="stop">暂停</button>
+  <button id="play">播放</button>
+  <video src="./static/蜡笔小新.mp4" controls></video>
+</body>
+<script>
+  /* 
+  获取视频 需要时间 
+  当前视频的总时长  需要等待视频加载完之后 再获取 
+  oncanplay 视频加载完毕 执行
+  duration 视频的总时长 
+   */
+  // 获取dom元素
+  var video = document.querySelector("video");
+  var stopBtn=document.querySelector("#stop");
+  var playBtn=document.querySelector("#play");
+
+  // 视频加载完毕
+  video.oncanplay = function () {
+    // 当前视频的总时长 
+    console.log(video.duration);
+  }
+
+  // 正在播放的时候触发
+  video.ontimeupdate = function () {
+    // 播放进度
+    // console.log(video.currentTime);
+
+    // if(video.currentTime>10){
+    // alert("播放时间到了,请充值");
+
+    // }
+  }
+
+  stopBtn.onclick=function(){
+    // 暂停
+    video.pause();
+  }
+
+  playBtn.onclick=function(){
+    video.play();
+  }
+</script>
+
+
+</html>

@@ -1,0 +1,146 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 20px;
+        }
+        .box {
+            width: 600px;
+            height: 40px;
+            margin: 200px auto;
+            position: relative;
+        }
+        #txt {
+            width: 498px;
+            height: 38px;
+            border: 1px solid #eee;
+            font-size: 20px;
+            background-color: hotpink;
+        }
+        #search {
+            width: 100px;
+            height: 40px;
+        }
+        #keywords {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: rgb(12, 255, 24);
+            list-style: none;
+            width: 500px;;
+        }
+        li {
+            line-height: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="top">
+        <input type="text" id="txt"/><input type="button" value="search" id="search"/>
+    </div>
+    <ul id="keywords"></ul>
+</div>
+<script>
+    var keywords = ["冬天吃什么","冬天的离别","冬天有多冷","林丹出轨门","林丹夺冠","123","JavaScript","Java","詹文杰","文杰去隔壁村","翠华","翠华不喜欢文杰","文杰非要死皮赖脸",'李狗蛋','李狗蛋和小红',"李狗蛋和小红帽"];
+
+    /*
+    * 从现象，逆推出过程
+    *   现象：
+    *       输入要搜索的词，就会在输入框的下面出现一些备选词汇
+    *
+    *           1 词汇从哪里来？
+    *               从百度的服务器来
+    *
+    *               得到词汇之后，要让浏览器吧这些词汇放在标签里面，显示在页面中
+    *
+    *
+    *  推导过程：
+    *       1 输入内容-->只要是输入，就要想到键盘事件-->一般用keyup
+    *           推导出： 需要注册键盘的弹起事件
+    *       2 在搜索框下面出现词汇：
+    *           词汇从服务器来，跟当前的输入内容有关系的
+    *           怎么获取数据？
+    *               我们没有服务器，所以只能自己比对词汇
+    *
+    *               词汇是大量的词汇---> 用数组把大量词汇先存起来
+    *               有了大量的词汇，就可以对比输入的内容，筛选出跟输入内容相关的词汇
+    *
+    *      3 得到相关词汇之后，要把词汇显示在浏览器里面，输入框的下面
+    *           只要是从服务器得到的数据，都动态生成结构，展示
+    *
+    * */
+
+    // 在输入完毕的时候，要得到输入的内容
+    // 注册事件
+    var search = document.getElementById('txt');
+    var ul = document.getElementById('keywords');
+
+    search.onkeyup = function(){
+        //1 获取输入的内容，用来跟词汇数组中的词汇对比
+        var txt = search.value;
+        // 因为所有的字符都包含空字符串，所如果内容是空字符串的时候，导致所有的词汇都拿到了，逻辑要求：如果是空字符串，应该是不对比的，如果没有输入，应该是没有搜索
+        // 不搜索，就不请求数据
+        // 不请求，就不执行下面的代码
+        if(txt == ""){
+            // 在删除的时候，可能还是有下拉的词汇的，还是要清空
+            ul.innerHTML = "";
+            return;
+        }
+
+        // 2 对比数组
+
+        // 2.3 在外面准备一个空的数组，用来装返回给浏览器的词汇
+        var temp = [];
+        for(var i = 0; i < keywords.length ; i++){
+            // 怎么对比？因为要到的的词汇是跟输入的内容是相关的--> 包含关系  --> 只要是出现的位置是 >= 0 或者不等于 -1
+            // 百度的规则是，以  输入的内容  开头 --> 出现的位置索引为0
+
+            // 2.1 把每个词汇跟输入的内容对比
+            if(keywords[i].indexOf(txt) != -1){
+                // 这个词汇就是跟输入的内容相关的，要返回给浏览器
+                // 词汇的数量是不一定，也可能是大量的，就放到数组中返回
+//                2.2 把筛选出来的词汇放到数组中
+                temp.push(keywords[i]);
+
+            }
+        }
+
+        // 每次往结构中添加li之前，可能都需要把之前的先移除
+        ul.innerHTML = "";
+
+        // 3 已经得到了服务器返回的数组，要把数据展示在浏览器之上
+        // 多个词条,同类型数据，没有先后顺序，--->无序列表展示
+        // 根据得到的数组，生成多个li，放在ul里面
+        for(var j = 0; j < temp.length ; j++){
+            // 3.1 生成li
+            var li = document.createElement('li');
+            li.innerHTML = temp[j];//把词汇放到li里面展示
+            // 3.2 加入结构
+            ul.appendChild(li);
+        }
+    }
+
+</script>
+
+<div>
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

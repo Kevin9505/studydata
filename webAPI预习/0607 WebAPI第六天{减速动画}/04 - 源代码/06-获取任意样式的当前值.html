@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        div {
+            width: 300px;
+            height: 150px;
+            background-color: rgb(0,170,0);
+        }
+        .abc {
+            height: 312px;
+            left: 0;
+        }
+        
+    </style>
+</head>
+<body>
+<div id="box" class="abc"></div>
+<script>
+
+    /*     计算过后的
+    *  get Computed Style
+    *
+    *       该API的作用：
+    *           获取计算过后的(最终作用在元素身上的)样式
+    *
+    *           用法：
+    *               window.getComputedStyle(element)
+    *
+    *
+    *           1 通过该方法得到的是对象，对象要通过访问属性的方式得到想要的属性的当前值，这个当前值得到的结果是字符串，如果要计算，记得转换
+    *           2 兼容性
+    *               ie8不兼容
+    *
+    *               ie8支持的方式为：
+    *                   element.currentStyle
+    *
+    * */
+    var box = document.getElementById('box');
+
+//    var res = window.getComputedStyle(box);
+//
+//    console.log(res.width);
+//    console.log(res.height);
+//    console.log(res.backgroundColor);
+//    console.log(res['width']);
+//    console.log(res['height']);
+//    console.log(res['left']);
+
+    console.log(box.currentStyle.width);
+    console.log(box.currentStyle.height);
+    console.log(box.currentStyle.backgroundColor);
+
+</script>
+</body>
+</html>

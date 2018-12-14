@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" id="search" value="欧普照明"/>
+<script>
+
+    /*
+    *   需求：
+    *       1 把光标点进输入框里面的时候，如果没有用户输入的内容，清空，如果有用户输入的内容，就不清空
+    *       2 当把鼠标的光标移出输入框，如果里面没有输入任何内容，恢复原来在里面的文本
+    *               修改的是vlaue
+    *         如果如果有内容，就维持原来的内容不变
+    *
+    *
+    *   思路：
+    *       在获得焦点的时候，把文本清空
+    *       在失去焦点的时候，把文本恢复
+    *
+    *
+    *
+    * */
+    // 获取元素
+    var search = document.getElementById("search");
+    // 注册事件z
+    search.onfocus = function(){
+        // 判断，是否有有用户的输入？ --> 当前的内容不是原来的文本(欧普照明)
+        // 如果当前的内容是欧普照明 ，就不是用户输入的内容，就应该清空
+        if(search.value == "欧普照明"){
+            // 此时用户没有输入，清空
+            search.value = "";
+        }
+
+    }
+    search.onblur = function(){
+        // 判断是否有输入  ---> 怎么样是有输入？ 只要当前的内容不是空字符串，就是有内容
+//        if(search.value != ""){
+//            // 什么都不做
+//        }else {
+//            // 恢复原来的内容
+//            search.value = "欧普照明";
+//        }
+
+        //如果没有内容，就恢复原来的文本
+        if(search.value == ""){
+            //恢复
+            search.value = "欧普照明";
+        }
+
+    }
+
+</script>
+</body>
+</html>

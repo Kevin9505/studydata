@@ -1,0 +1,154 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-size: 20px;
+        }
+        .box {
+            width: 600px;
+            height: 40px;
+            margin: 200px auto;
+            position: relative;
+        }
+        #txt {
+            width: 498px;
+            height: 38px;
+            border: 1px solid #eee;
+            font-size: 20px;
+            background-color: hotpink;
+        }
+        #search {
+            width: 100px;
+            height: 40px;
+        }
+        #keywords {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: rgb(12, 255, 24);
+            list-style: none;
+            width: 500px;;
+        }
+        li {
+            line-height: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="top">
+        <input type="text" id="txt"/><input type="button" value="search" id="search"/>
+    </div>
+    <ul id="keywords"></ul>
+</div>
+<script>
+    var keywords = ["冬天吃什么","冬天的离别","冬天有多冷","林丹出轨门","林丹夺冠","123","JavaScript","Java","詹文杰","文杰去隔壁村","翠华","翠华不喜欢文杰","文杰非要死皮赖脸",'李狗蛋','李狗蛋和小红',"李狗蛋和小红帽"];
+
+    /*
+    *  在用户输入完毕(键盘弹起)的时候，
+    *
+    *  因为没有服务器，只能自己模拟这个过程
+    *
+    *  使用一个数组存储所有的词条
+    *
+    *  每次用户输入完毕，就对比这个数组，找出类似的(包含用户输入的信息)
+    *
+    *  返回给浏览器，动态的生成词条列表，放到ul里面
+    * */
+
+    // 获取元素，注册键盘弹起事件
+    var search = document.getElementById("txt");
+    var ul = document.getElementById("keywords");
+    search.onkeyup = function(){
+        // 1 获取用户输入的内容
+        var txt = search.value;
+        ul.innerHTML = '';
+        // 1.2 判断是否为空字符串，如果为空，就不继续执行了
+        if(txt == ""){
+            return;
+        }
+
+        // 2 发送到服务器，进行词条的获取
+        //    其实因为穷，自己用数组模拟一个
+        //    把用户的输入的信息，跟数组对比，只要是包含用户输入的信息，就返回给浏览器
+        // 2.2 先准备一个容纳词条的数组
+        var temp = [];
+        // 2.1 遍历词条数组，对比看看是否包含
+        for(var i = 0; i < keywords.length ; i++){
+            //判断是否包含  indexOf的结果不为-1
+            if(keywords[i].indexOf(txt) != -1){
+                //只要包含就认为是相似的,加入返回的数组里面
+                temp.push(keywords[i]);
+            }
+        }
+
+//        console.log(temp);
+
+
+        /*
+        *  bug1:
+        *       输入完成后，生成了词条，下次生成新的词条后，会越来越多
+        *
+        *       原因：appendChild是不会覆盖的
+        *
+        *       1 可以改成innerHTML的方式生成元素
+        *       2 可以在每次要生成新的词条前，先把原来的都删除
+        *           2.1  removeChild
+        *           2.2  ul.innerHTML = "";
+        *
+        *
+        *  bug2
+        *       如果删除光之后，会得到所有的词条
+        *
+        *       原因：
+        *           当空字符串也对比数据的时候，得到的是所有的数据
+        *
+        *       解决方案：
+        *           如果内容是空字符串，不请求了
+        *
+        *  bug3
+        *       如果删除光了之后，直接后面的代码都不执行，也不清空了
+        *
+        *       解决方案：
+        *           如果是空字符串的时候，也清空一次
+        * */
+
+
+        // 需要在每次生成新的词条之前，先把之前添加的词条都清空
+//        ul.innerHTML = '';
+
+        // 3 把词条返回给浏览器，让浏览器动态的生成多个词条，放在ul里面
+        // 3.1 遍历返回来的词条数组，生成多个li添加到ul里面即可
+        for(var j = 0; j < temp.length ; j++){
+            // 3.2 生成li
+            var li = document.createElement('li');
+            // 3.3 设置li的内容
+            li.innerHTML = temp[j];
+            // 3.4 添加到ul中
+            ul.appendChild(li);
+        }
+    }
+
+
+    /*
+    *   不管什么字符串  indexOf  空字符串，都会得到0
+    *
+    *   任意字符串都包含空字符串
+    *  */
+
+    console.log("abc".indexOf(""));
+    console.log("冬天吃什么".indexOf(""));
+    console.log("李狗蛋和小红".indexOf(""));
+
+</script>
+</body>
+</html>

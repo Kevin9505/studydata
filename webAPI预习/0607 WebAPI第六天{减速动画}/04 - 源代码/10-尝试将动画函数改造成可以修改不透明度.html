@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        /*#box {*/
+            /*width: 100px;*/
+            /*height: 100px;*/
+            /*/!*background-color: rgba(255,0,0,0.5);*!/*/
+            /*position: absolute;*/
+            /*top: 100px;*/
+            /*left: 100px;*/
+            /*font-size: 50px;*/
+            /*background-color: #f00;*/
+            /*/!**/
+                /*修改整个元素的透明度*/
+                    /*如果数值越小，透明度越明显*/
+            /**!/*/
+            /*/!*opacity: 0.1;*!/*/
+        /*}*/
+        /*.abc {*/
+            /*width: 200px;*/
+            /*height: 200px;*/
+            /*background-color: #0a0;*/
+            /*font-size: 100px;*/
+        /*}*/
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+            opacity: 0.5;
+        }
+
+    </style>
+</head>
+<body>
+<input type="button" value="消失" id="btn"/>
+<input type="button" value="出现" id="btn2"/>
+<input type="button" value="出现" id="btn2"/>
+<div id="box"></div>
+<!--<div class="abc"></div>-->
+<script>
+
+    /*
+    *  修改透明度
+    *
+    *       修改宽高的不同：
+    *
+    *           单位  opacity
+    *           透明度修改的是小数
+    *
+    * */
+
+    var box = document.getElementById('box');
+
+
+    document.getElementById('btn').onclick = function(){
+        //使用定时器，每隔一段时间修改一次透明度
+
+//        var o = window.getComputedStyle(box).opacity;
+//        console.log(o);
+
+        var timer = setInterval(function(){
+            var target = 0;
+            // 1 获取当前值
+            var current = parseFloat(window.getComputedStyle(box).opacity);
+            // 2.1 先把所有需要计算的数字放大:放大的倍数控制100倍即可，因为一般控制透明度，都是最多2位小数
+            // 先放大
+            current = current * 100;
+            target = target * 100;
+
+            // 2 变化一点点
+//            current -= 0.1;
+            var step = (target - current) / 10;
+            // step已经是 小数运算的结果，直接用来和别的数字比较是很危险的，因为小数运算时很容易产生误差的，先放大在取整，再比较
+            // 根据方向取整
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            current += step;
+            // 3 修改回对象身上
+//            box.style.opacity = current;//记得不用加单位
+            box.style.opacity = current/100;//因为放大了一百倍，赋值回去的时候，要变回原来的倍数
+            // 再取整
+            current = Math.floor(current);
+            target = Math.floor(target);
+            // 4 停下
+            // 再比较
+            if(current == target){
+                clearInterval(timer);
+            }
+        },20);
+
+    }
+
+    document.getElementById('btn2').onclick  =function(){
+        animate(box,1);
+    }
+
+    //封装
+
+    function animate(element,target1){
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            var target = target1;
+            // 1 获取当前值
+            var current = parseFloat(window.getComputedStyle(element).opacity);
+            current = current * 100;
+            target = target * 100;
+            var step = (target - current) / 10;
+            // 根据方向取整
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            current += step;
+            // 3 修改回对象身上
+            element.style.opacity = current/100;//因为放大了一百倍，赋值回去的时候，要变回原来的倍数
+            current = Math.floor(current);
+            target = Math.floor(target);
+            // 4 停下
+            if(current == target){
+                clearInterval(element.timer);
+            }
+        },20);
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul {
+            width: 400px;
+            margin: 10px auto;
+            list-style: none;
+        }
+        li {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        
+    </style>
+</head>
+<body>
+<input type="button" value="点击" id="btn"/>
+<ul id="father">
+    <li class="red">1</li>
+    <li class="green">2</li>
+    <li class="red">3</li>
+    <li class="green">4</li>
+
+</ul>
+<script>
+
+    /*
+    *   点击按钮的时候生产多个li，并让鼠标在移入li的时候可以当前高亮
+    *
+    *   动态创建元素有常用的2种方式
+    *
+    *       document.createElement
+    *
+    *           一般在创建结构比较复杂的情况，会比较麻烦，所以推荐创建简单结构的时候，使用document.createElement
+    *
+    * */
+
+    // 获取元素
+    var btn= document.getElementById("btn");
+    var father= document.getElementById("father");
+    var lis = father.getElementsByTagName('li');
+    // 注册事件
+    btn.onclick = function(){
+        // 创建4个li
+        for(var j = 0; j < 4 ; j++){
+            var li = document.createElement('li');
+            console.dir(li);
+            //追加到父元素当中
+            father.appendChild(li);
+            //判断索引，添加class
+            if(j % 2 == 0){
+                li.className = 'red';
+            }else{
+                li.className = 'green';
+            }
+            // li已经是得到了想要注册事件的事件源，就不用再次获取了
+            li.onmouseover = mouseOverHandle;
+            li.onmouseout = mouseOutHandle;
+        }
+    }
+    
+    // 给所有的li注册鼠标移入和移出事件
+    for(var i = 0; i < lis.length ; i++){
+        lis[i].onmouseover = mouseOverHandle;
+        lis[i].onmouseout = mouseOutHandle;
+    }
+
+    function mouseOverHandle(){
+        // 修改当前元素的背景颜色
+        this.style.backgroundColor = 'yellow';
+    }
+
+    function mouseOutHandle(){
+        // 恢复原状
+        this.style.backgroundColor = '';
+    }
+
+
+
+</script>
+</body>
+</html>

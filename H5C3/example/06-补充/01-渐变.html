@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 500px;
+      height: 500px;
+      margin: 100px auto;
+      /*
+      因为渐变不是一种单颜色 所以不能给 background-color 加
+      以前在网页里面想要实现渐变效果 只能依靠图片 
+      渐变就给bgi加  或者 给bg
+        */
+      /* 
+      线性渐变
+      linear gradient 
+      参数(方向,颜色 颜色开始的位置,颜色 结束的位置....)
+      方向:
+      系统提供  to top |bottom |left |right | right top 
+      自定义角度  0deg 
+       */
+      /* background-image:linear-gradient(#000,red,yellow); */
+      /* background-image:linear-gradient(to right top , #000,red,yellow); */
+      /* background-image:linear-gradient(0deg , #000,red,yellow); */
+      /* 0-10%  黑色->红色的渐变   10%-20% red->yellow  20%-100% yellow->white   */
+      /* background: linear-gradient(#000 0%,red 10%,yellow 20%,#fff 20%, #fff 100%); */
+      border-radius: 50%;
+      background-image: linear-gradient(#000, red);
+    }
+  </style>
+</head>
+
+<body>
+  <div></div>
+</body>
+
+</html>

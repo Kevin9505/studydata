@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        img {
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+<img src="images/tianshi.gif" alt="" id="img"/>
+<div style="width: 300px;height: 3000px;background-color:#0a0;"></div>
+<script src="eventTool.js"></script>
+<script>
+
+    /*
+    *  注册鼠标的移动事件，获取鼠标的位置，设置给图片
+    * */
+    var img = document.getElementById('img');
+    document.onmousemove = function(e){
+        // 获取pageX和pageY
+        var x = eventTool.getPageX(e);
+        var y = eventTool.getPageY(e);
+        // 设置给图片
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+    }
+
+
+    function getEvent(){
+
+    }
+    eventTool.getEvent()
+</script>
+</body>
+</html>

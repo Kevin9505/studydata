@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        img {
+            /*position: absolute;*/
+            /*position: fixed;*/
+            /*
+                固定定位
+                定位基准：就是浏览器的可视区域
+            */
+            /*top: 0;*/
+            /*left: 0;*/
+            /*right: 0;*/
+            /*bottom: 0;*/
+
+            position: absolute;
+        }
+        .box {
+            width: 200px;
+            height: 2000px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<img src="images/tianshi.gif" alt=""/>
+<script>
+
+    /*
+    *  在鼠标移动的时候，获取鼠标的位置，设置给图片
+    *   mousemove  鼠标移动的事件 -- 鼠标在某个对象身上移动的时候触发
+    * */
+    var img = document.getElementsByTagName('img')[0];
+    document.onmousemove = function(e){
+        // 获取鼠标的位置
+        var x = e.clientX;
+        var y = e.clientY;
+        // 设置给图片
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+    }
+
+</script>
+</body>
+</html>

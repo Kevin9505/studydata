@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text" name="" id="txt"/>
+<script>
+
+    /*
+    *  获得焦点
+    *       输入框得到光标，可以输入的状态
+    *
+    *       focus
+    *
+    *  失去焦点
+    *       输入框，失去光标，无法输入的状态
+    *
+    *       blur
+    * */
+    
+    var txt = document.getElementById('txt');
+    
+    // 获得焦点
+    txt.onfocus = function(){
+        console.log(123);
+    }
+    txt.onblur = function(){
+        console.log(456);
+    }
+    
+
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        ul {
+            padding: 0;
+            width: 600px;
+            margin: 100px auto;
+            list-style: none;
+        }
+        li {
+            height: 30px;
+            line-height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<ul id="father">
+    <li>我是第1个li</li>
+    <li>我是第2个li</li>
+    <li>我是第3个li</li>
+    <li>我是第4个li</li>
+    <li>我是第5个li</li>
+    <li>我是第6个li</li>
+</ul>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<script>
+
+    var father = document.getElementById("father");
+    var lis = father.getElementsByTagName('li');
+
+    for(var i = 0; i < lis.length ; i++){
+        //判断索引的奇偶性
+        if(i % 2 != 0){
+            // 索引是从0开始的，如果是第一行，索引为0，第二行索引为1
+            lis[i].style.backgroundColor = 'green';
+        }else {
+            lis[i].style.backgroundColor = 'red';
+        }
+    }
+
+    /*
+    *   鼠标移入哪一行就让哪一行的颜色跟其他的不一样
+    *
+    *   当鼠标离开的时候，就让所有的li恢复原来的状态
+    * */
+    // 注册鼠标的移入事件
+    for(var j = 0; j < lis.length ; j++){
+        lis[j].onmouseover = function () {
+            // 把当前的li的背景颜色变成黄色
+            this.style.backgroundColor = 'yellow';
+        }
+
+        lis[j].onmouseout = function(){
+            // 原状： 隔行变色
+            for(var i = 0; i < lis.length ; i++){
+                //判断索引的奇偶性
+                if(i % 2 != 0){
+                    // 索引是从0开始的，如果是第一行，索引为0，第二行索引为1
+                    lis[i].style.backgroundColor = 'green';
+                }else {
+                    lis[i].style.backgroundColor = 'red';
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>
+</html>

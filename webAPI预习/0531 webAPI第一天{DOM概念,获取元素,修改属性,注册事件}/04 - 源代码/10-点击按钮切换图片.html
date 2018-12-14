@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        div.main {
+            width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main">
+
+    <div class="first">
+        <input type="button" value="美女1" id="btn1"/>
+        <input type="button" value="美女2"  id="btn2"/>
+        <input type="button" value="美女3" id="btn3"/>
+        <input type="button" value="美女4"  id="btn4"/>
+        <input type="button" value="美女5"  id="btn5"/>
+    </div>
+    <div class="second">
+        <img src="images/01.jpg" alt="" id="img"/>
+    </div>
+
+</div>
+<script>
+
+    /*
+    *  点击按钮切换对应的图片
+    * */
+    // 获取元素
+    var btn1 = document.getElementById("btn1");
+    var btn2 = document.getElementById("btn2");
+    var btn3 = document.getElementById("btn3");
+    var img = document.getElementById("img");
+    // 注册事件
+    btn1.onclick = function(){
+        img.src = 'images/01.jpg';
+    }
+    btn2.onclick = function(){
+        img.src = 'images/02.jpg';
+    }
+    btn3.onclick = function(){
+        img.src = 'images/03.jpg';
+    }
+    // 切换图片的路径
+
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+            position: absolute;
+            top: 100px;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+<input type="button" value="1000" id="btn"/>
+<input type="button" value="100" id="btn2"/>
+<div id="box"></div>
+<script>
+
+    /*
+    *  之前的动画匀速的原因
+    *       每次移动的距离都是固定不变的
+    *
+    *       如果要改造成减速动画
+    *
+    *           思路： 保证每次移动的距离越来越小
+    *
+    *               每次移动剩下距离的1/10
+    *
+    * */
+
+    function animate(element,target){
+        // 为了保证每次动画只有一个定时器，先把上一次的清除
+        clearInterval(element.timer);
+        // 开启这次动画的定时器
+        element.timer = setInterval(function(){
+            // 1 获取当前位置
+            var current = element.offsetLeft;
+            // 2 移动一点点
+//            step = step || 40;//之所以匀速，因为每次移动的距离是固定的
+            // 要减速： 思路 - > 每次移动剩下距离的1/10
+            var step = (target - current) / 10;//默认的取整方式，导致可能会止步不前
+            // 向上取整，尝试解决
+            //step = Math.ceil(step);// 虽然不用判断方向决定是加还是减，但是需要判断方向取整，
+            // 思路是： 保证至少往当前方向走1个像素，如果是正方形，至少+1，如果是负方向，至少-1，如果是负方向的时候，向下取整
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            // 2.1 判断方向，决定+=还是-=
+//            current <= target ? current += step : current -= step;
+            //current += current <= target ?  step : -step;//如果是从右到左，step已经自带方向了，就不用判断方向决定是否加减
+            current += step;
+            // 3 修改回对象身上
+            element.style.left = current + 'px';
+            // 4 停下
+            // 发现取整之后，一定都能到达目标的位置，这个时候，判断停下的条件，就太复杂了，可以改的简单点：  是否到达目标位置
+//            if(Math.abs(target - current) <= step){
+            if(target == current){
+                clearInterval(element.timer);
+//                element.style.left = target + 'px';
+            }
+            console.log(1);
+
+        },20);
+    }
+
+    //试一试
+    var box = document.getElementById('box');
+    document.getElementById('btn').onclick = function(){
+        animate(box,1000);
+    }
+    document.getElementById('btn2').onclick = function(){
+        animate(box,100);
+    }
+
+</script>
+</body>
+</html>

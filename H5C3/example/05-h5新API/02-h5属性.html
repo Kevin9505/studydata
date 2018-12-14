@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="./images/lbxx.jpg" data-it14="data-卢烽开" it14="卢烽开" id="img1" alt="">
+  <!-- 
+    标签的属性 分为3类
+    1 内置属性   dom.内置属性  
+    2 自定义属性 it14  dom.自定义属性  失败   dom.getAttribute("属性名") 可以获取任何属性 
+    3 h5自定义属性   data-it14
+    h5 规定  如果使用新的自定义属性的话,只要在属性名前面加上 data-  被认为是h5自定义属性了. 
+    dom.dataset.it14="data-卢烽开"
+    h5 把h5自定义属性 存放到了 dataset对象里面去了 
+   -->
+
+
+  <script>
+    // 获取dom
+    var img = document.querySelector("img");
+
+    console.log(img.id);
+    // console.log(img.it14);
+    // console.log(img.getAttribute("it14"));
+    // console.log(img.getAttribute("data-it14"));
+
+    // console.log(img.dataset);
+
+    // 写值
+    img.dataset.itt14="王少";
+
+    console.log(img.dataset);
+  </script>
+</body>
+
+</html>

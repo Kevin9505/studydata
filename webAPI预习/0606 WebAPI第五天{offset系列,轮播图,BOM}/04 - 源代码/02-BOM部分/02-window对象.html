@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    /*
+    *
+    *   每次声明一个全局变量，就给window对象添加了一个属性
+    *   只不过我们平时使用全局变量，是不用window点的
+    *   window对象是可以省略的
+    *   原因在于：
+    *       window对象是整个浏览器的顶级对象
+    *
+    *       BOM  的学习
+    *
+    *           Browser Object Model  浏览器对象模型
+    *
+    *           把整个浏览器当初对象看待，浏览器里面的任何东西都是对象的属性或者方法
+    *
+    *           学习BOM，就是学习window对象的属性和方法
+    *               document对象也不过是window的一个属性而已
+    *
+    *
+    *           学习BOM中的几个对象
+    *
+    *               window
+    *                   1 全局变量和全局函数都是window的属性和方法而已，在使用的时候，是可以把window省略的
+    *                   2 widow还有那些属性和方法需要掌握：
+    *                       open
+    *                           window.open(); // 打开一个新的页面
+    *                       close
+    *
+    *
+    * */
+
+//    function fn(){
+//        var a = b = c = 9;
+//        var a = window.b = window.c = 9;
+//    }
+    // 上述代码中的b和c是全局变量
+
+//    var aaaaaaaaaaaaaaaaaaaaaaaa = 10;
+//    console.log(aaaaaaaaaaaaaaaaaaaaaaaa);
+//
+//    console.log(window);
+//    console.log(window.aaaaaaaaaaaaaaaaaaaaaaaa == aaaaaaaaaaaaaaaaaaaaaaaa);
+
+//    var obj = {
+//        age : 18
+//    };
+//    console.log(obj.age);
+//
+//    console.log(age);
+
+//    console.log(window.document);
+//    console.log(document);
+//    console.log(document === window.document);
+</script>
+</body>
+</html>

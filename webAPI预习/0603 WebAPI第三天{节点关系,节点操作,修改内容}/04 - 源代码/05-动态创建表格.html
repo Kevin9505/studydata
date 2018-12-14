@@ -1,0 +1,119 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        table {
+            border: 1px solid #000;
+            /*将表格的边框合并*/
+            border-collapse: collapse;
+            width: 600px;
+            margin: 0 auto;
+        }
+        th,td {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="生产表格" id="btn"/>
+
+<script>
+
+    /*
+    * 需求：
+    *   点击按钮的时候，就把数据动态的展示在页面当中
+    *       观察发现：
+    *           表头是由 heads这个数字决定
+    *
+    *           每一行数据对应一个对象
+    *               每个对象里面的数据，对应一行中的每一列数据
+    *
+    *        1 根据表头，生产一行和三个th
+    *        2 根据datas数组，每个对象生产一行，对象里面的数据对应每个td
+    * */
+
+    var heads=["姓名","科目","分数"];
+    var datas = [
+        {"name":"乔峰","subject":"语文1","score":99.8},
+        {"name":"张三丰","subject":"语文2","score":80.8},
+        {"name":"张无忌","subject":"语文3","score":70.8},
+        {"name":"梅超风","subject":"语文4","score":100},
+        {"name":"黄老邪","subject":"语文5","score":60},
+        {"name":"凤姐","subject":"语文6","score":70},
+        {"name":"芙蓉姐姐","subject":"语文7","score":89.8}
+    ];//这个数据以后要从服务器中获取
+
+    /*
+    *  正常的写表格的思路：
+    *   1 先写table
+    *   2 再写tr
+    *       3 在每个tr里面写多个td
+    * */
+
+    var btn = document.getElementById("btn");
+    btn.onclick = function(){
+        // 创建table
+        var table = document.createElement('table');
+        // 把table追加到结构中
+        document.body.appendChild(table);
+        // 完成表头的创建
+        var head = document.createElement('tr');
+        // 把行添加到表格中，作为表格的子元素
+        table.appendChild(head);
+        // 遍历heads数组，生产多个th
+        for(var i = 0; i < heads.length ; i++){
+            // 生成th
+            var th = document.createElement('th');
+            head.appendChild(th);
+            // 给th添加内容
+            th.innerHTML = heads[i];
+        }
+    // ----- 以上完成表头
+        // --- 接下来完成数据的主体
+        // 遍历datas数组，生成多个数据行
+        for(var j = 0; j < datas.length ; j++){
+            //生成tr
+            var tr = document.createElement('tr');
+            // 把tr添加到结构中
+            table.appendChild(tr);
+            // 每一行对应多个td，又要生成
+            // 对象的每个键值对就对应一个td
+            // 遍历对象，
+            var obj = datas[j];
+            for(var key in obj){
+                // 根据键值对的个数，生成td
+                var td = document.createElement('td');
+                tr.appendChild(td);
+                // 设置td的内容
+                td.innerHTML = obj[key];//通过对象的健读取对象的值
+            }
+        }
+    }
+
+
+
+    /*
+    *  改成innerHTML
+    *   思路：
+    *       先使用document.createElement('table')创建一个表格/或者直接在静态结构中先写一个表格
+    *
+    *       遍历数组，得到每个对象，把每个对象的键值对取出来，替换td里面的内容
+    *       var html = "";
+    *
+    *       for(var key in datas[i]){
+    *           //把每个td的字符串格式拼接起来
+    *           html += '<td>'+ obj[key] +'</td>';
+    *       }
+    *
+    *       table.innerHTML = html;
+    * */
+
+</script>
+
+</body>
+</html>

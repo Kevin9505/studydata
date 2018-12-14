@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+            position: absolute;
+            left: 0;
+            top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<input type="button" value="走起" id="btn"/>
+<input type="button" value="回来" id="btn2"/>
+<input type="button" value="到500的位置" id="btn3"/>
+<div id="box"></div>
+<script>
+
+   /*
+   *  每隔一段时间，让盒子发生一点位移
+   * */
+
+    var btn = document.getElementById('btn');
+    var btn2 = document.getElementById('btn2');
+    var btn3 = document.getElementById('btn3');
+    var box = document.getElementById('box');
+
+   // 到1000的位置
+    btn.onclick = function(){
+
+        var timer = setInterval(function(){
+            //1 先得到当前位置
+            var current = box.offsetLeft;
+            //2 让位置发生移动
+            current += 10;
+            //3 设置回box的left属性身上
+            box.style.left = current +"px";
+            //4 判断是否停下
+            if(current >= 1000){
+                clearInterval(timer);
+            }
+
+        },20);
+    }
+
+    // 回到0的位置
+    btn2.onclick = function(){
+        var timer = setInterval(function(){
+            // 得到当前位置
+            var current = box.offsetLeft;
+            // 发生位移
+            // 从右边到左边，移动的坐标应该变小的
+            current -= 10;
+            // 修改left属性
+            box.style.left = current + "px";
+            // 停下来
+            if(current <= 0){
+                clearInterval(timer)
+            }
+        },20);
+    }
+
+    // 到500的位置
+   btn3.onclick = function(){
+       var timer = setInterval(function(){
+           //1 先得到当前位置
+           var current = box.offsetLeft;
+           //2 让位置发生移动
+//           current += 10;
+           // 判断要移动的方向，根据方向，决定是-=还是+=
+           // 方向： 当前位置和目标的500的位置的相对大小
+           if(current <= 500){
+                // 从左到右应该+=
+               current += 11;
+           }else {
+                // 从右到左，-=
+               current -= 11;
+           }
+           //3 设置回box的left属性身上
+           box.style.left = current +"px";
+           //4 判断是否停下
+           // 停下里的条件变了: 认为只要下次移动的距离不足一个步长，就停下
+           // 求出 当前位置 到 目标500 位置的距离 ，如果小于步长11 ，就停下
+           // 距离应该是大于0的数字，如果出现负数了，求绝对值：  Math.abs(目标 - 当前);
+//           if(current == 500){
+           if(Math.abs(500 - current) <= 11){
+               clearInterval(timer);
+               // 为了保证能到达目标的位置：强制设定box的位置为目标位置
+               box.style.left = 500 + "px";
+           }
+
+       },20);
+   }
+
+</script>
+</body>
+</html>

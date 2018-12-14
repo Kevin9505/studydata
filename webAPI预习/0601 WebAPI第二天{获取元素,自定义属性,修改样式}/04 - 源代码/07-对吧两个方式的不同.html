@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .abc {
+            background-color: #0a0;
+            font-size: 50px;
+            color: pink;
+        }
+        .aaa {
+            background-color: #f00;
+            font-size: 100px;
+            color: green;
+        }
+        .b {
+            width: 100px;
+            height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="b abc" id="box" >123</div>
+<input type="button" value="切换为红色" id="btn"/>
+<script>
+
+    /*
+    *  通过修改class修改样式
+    *       1 必须事先在css代码中准备好一个用于修改的没有被使用的类
+    *       2 设置className属性的时候，是会直接覆盖的，有可能会把其他的效果变没有
+    *           因此要注意：
+    *               使用类样式切换的时候要保证，两个class进行切换的效果要单独控制
+    *
+    *               一般使用类样式控制的时候，都要结合css代码一起观察着写，比较麻烦
+    *
+    *       2 处理类样式比较麻烦
+    *       3 可以一次性修改多个属性
+    *
+    *       如果想要一次性修改多个属性，一般都使用类样式修改
+    *
+    *  通过修改style的方式
+    *
+    *       1 想改什么属性，直接改即可
+    *       2 每个属性都要单独操控
+    *
+    *       如果改的属性比较少，一般使用style的方式修改
+    * */
+    document.getElementById("btn").onclick = function(){
+//        document.getElementById("box").className = "aaa b";
+        document.getElementById("box").className = "b aaa";
+    }
+
+//    document.getElementById("btn").onclick = function(){
+//        document.getElementById("box").style.backgroundColor = 'red';
+//        document.getElementById("box").style.fontSize = '100px';
+//        document.getElementById("box").style.color = 'green';
+//    }
+
+</script>
+</body>
+</html>

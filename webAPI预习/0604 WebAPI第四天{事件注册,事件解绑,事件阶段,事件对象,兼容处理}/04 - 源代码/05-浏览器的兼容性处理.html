@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script>
+
+    var btn = document.getElementById('btn');
+    
+//    console.log(btn.addEventListener);
+//    console.log(btn.attachEvent);
+    /*
+    *  通过以上代码，我们发现一个规律：
+    *       只要该属性不是undefined，该属性就被当前的浏览器支持
+    *
+    *       做兼容处理的思路：
+    *
+    *           判断该属性是不是undefined，如果不是，就是支持的，我就可以使用这个方式，达到效果
+    * */
+
+    //判断该属性是不是undefined
+    if(btn.addEventListener != undefined){
+        // 说明该浏览器是支持  addEventListener 的
+        btn.addEventListener("click",function(){
+            console.log(123);
+        },false);
+    }else if( btn.attachEvent != undefined){
+        // 说明该浏览器=支持 attachEvent ,就可以使用
+        btn.attachEvent('onclick',function(){
+            console.log(123);
+        })
+    }
+
+</script>
+</body>
+</html>

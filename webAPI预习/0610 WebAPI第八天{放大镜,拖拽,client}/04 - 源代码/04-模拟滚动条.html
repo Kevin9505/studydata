@@ -1,0 +1,117 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            padding: 0 10px;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+        }
+        .inner {
+            position: absolute;
+        }
+        .slider {
+            width: 6px;
+            height: 60px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            position: absolute;
+            right: 1px;
+            top: 0px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    <div class="inner">
+        <p>舜发于畎亩之中，傅说举于版筑之中，胶鬲举于鱼盐之中，管夷吾举于士，孙叔敖举于海，百里奚举于市。</p>
+        <p>故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。</p>
+        <p>人恒过，然后能改；困于心，衡于虑，而后作；征于色，发于声，而后喻。入则无法家拂士，出则无敌国外患者，国恒亡。</p>
+        <p>然后知生于忧患，而死于安乐也.</p>
+        <p>舜发于畎亩之中，傅说举于版筑之中，胶鬲举于鱼盐之中，管夷吾举于士，孙叔敖举于海，百里奚举于市。</p>
+        <p>故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。</p>
+        <p>人恒过，然后能改；困于心，衡于虑，而后作；征于色，发于声，而后喻。入则无法家拂士，出则无敌国外患者，国恒亡。</p>
+        <p>然后知生于忧患，而死于安乐也.</p>
+        <p>舜发于畎亩之中，傅说举于版筑之中，胶鬲举于鱼盐之中，管夷吾举于士，孙叔敖举于海，百里奚举于市。</p>
+        <p>故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。</p>
+        <p>人恒过，然后能改；困于心，衡于虑，而后作；征于色，发于声，而后喻。入则无法家拂士，出则无敌国外患者，国恒亡。</p>
+        <p>然后知生于忧患，而死于安乐也.</p>
+        <p>舜发于畎亩之中，傅说举于版筑之中，胶鬲举于鱼盐之中，管夷吾举于士，孙叔敖举于海，百里奚举于市。</p>
+        <p>故天将降大任于是人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。</p>
+        <p>人恒过，然后能改；困于心，衡于虑，而后作；征于色，发于声，而后喻。入则无法家拂士，出则无敌国外患者，国恒亡。</p>
+        <p>然后知生于忧患，而死于安乐也.</p>
+    </div>
+    <div class="slider"></div>
+</div>
+<script>
+
+
+    // 获取元素
+    var slider = document.querySelector('.slider');
+    var outer = document.querySelector('.outer');
+    var inner = document.querySelector('.inner');
+
+
+    /*
+      优化：
+            希望鼠标按下，并且移动的时候，才会执行
+            在鼠标按下的，才给document注册移动对的事件
+
+    * */
+
+    // 注册事件
+    slider.onmousedown = function(e){
+        var tempTop = e.pageY - outer.offsetTop - slider.offsetTop;
+        // 注册鼠标移动事件
+        document.onmousemove = function(e){
+
+            // 2 计算出slider顶部应该距离outer顶部的距离
+            // 公式： pageY - outer.offsetTop - tempTop
+            var y = e.pageY - outer.offsetTop - tempTop;
+            // 2.2 限定滑块的移动的范围
+            // 如果超过，就强制设定
+            if(y <0) y = 0;
+            // 设定下限
+            // 下限应该是高度差
+            var maxY = outer.offsetHeight - 2 - slider.offsetHeight;
+            if( y > maxY) y = maxY;
+            // 设置给slider即可
+            slider.style.top = y + 'px';
+            // 3 移动内容
+            // 内容的移动和滑块的移动是等比例的移动
+            // 求内容的当前位置 = 滑块的当前位置 * 内容的最大移动 / 滑块的最大移动
+            // 3.1 求出内容的最大移动距离
+            // 内容的最大移动距离 = 内容的高度 - 容器的高度
+            var maxMove = inner.offsetHeight - outer.offsetHeight;
+            // 万事俱备 求出当前的内容的位置
+            // 求内容的当前位置 = 滑块的当前位置 * 内容的最大移动 / 滑块的最大移动
+            var currentY = y * maxMove / maxY;
+            // 3.2 设置回内容身上
+            inner.style.top = -currentY + 'px';
+
+        }
+    }
+
+    document.onmouseup = function(){
+        document.onmousemove = null;
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: #0a0;
+        }
+        
+    </style>
+</head>
+<body>
+<input type="button" value="变大" id="btn1"/>
+<input type="button" value="变小" id="btn2"/>
+<div id="box"></div>
+<script>
+
+/*
+*
+*
+* */
+
+    var btn1 = document.getElementById('btn1');
+    var btn2 = document.getElementById('btn2');
+    var box = document.getElementById('box');
+
+//    btn1.onclick = function(){
+        // 使用定时器，每隔一段时间让盒子变宽一点
+//        var timer = setInterval(function(){
+//            // 1 获取当前宽度
+//            var current = box.offsetWidth;
+//            // 2 变宽一点
+////            current += 10;
+//            // 每次改变剩下宽度的1/10
+//            var step = (800 - current) / 10;
+//            step = Math.ceil(step);
+//            current += step;
+//            // 3 修改回去
+//            box.style.width = current +'px';
+//            // 4 停下
+//            if(current >= 800){
+//                clearInterval(timer);
+//            }
+//
+//        },20);
+//    }
+
+//btn2.onclick = function(){
+    // 使用定时器，每隔一段时间让盒子变宽一点
+//    var timer = setInterval(function(){
+//        // 1 获取当前宽度
+//        var current = box.offsetWidth;
+//        // 2 变宽一点
+////            current += 10;
+//        // 每次改变剩下宽度的1/10
+//        var step = (100 - current) / 10;
+//        step = Math.floor(step);
+//        current += step;
+//        // 3 修改回去
+//        box.style.width = current +'px';
+//        // 4 停下
+//        if(current >= 800){
+//            clearInterval(timer);
+//        }
+//
+//    },20);
+//}
+
+    function animate(element,target){
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            // 1 获取当前宽度
+            var current = element.offsetWidth;
+            // 2 变宽一点
+            // 每次改变剩下宽度的1/10
+            var step = (target - current) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            current += step;
+            // 3 修改回去
+            element.style.width = current +'px';
+            // 4 停下
+            if(current == target){
+                clearInterval(element.timer);
+            }
+
+        },20);
+    }
+
+    btn1.onclick = function(){
+        animate(box,800);
+    }
+    btn2.onclick = function(){
+        animate(box,100);
+    }
+
+
+</script>
+</body>
+</html>

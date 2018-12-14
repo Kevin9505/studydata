@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box">
+    <div>
+        <div>
+            <div>小明，小刚，小红和他们的小伙伴</div>
+        </div>
+    </div>
+</div>
+<input type="text"/>
+<input type="button" value="按钮"/>
+<textarea  id="txt" cols="30" rows="10">我是文本域的内容</textarea>
+<script>
+
+    /*
+    *    非表单元素
+    *       innerHTML
+    *           获取和设置元素的内容(标签和文本)
+    *       innerText
+    *           获取和设置元素的内容(文本)
+    *           设置内容的时候，是不会解析成标签的
+    *
+    *           在非常低版本的火狐里面是无法使用的
+    *
+    *           如果非要兼容这么低版本火狐
+    *
+    *           textContent
+    *               该方式是可以获取到换行符的
+    *
+    *
+    *    表单元素
+    *
+    *       一般都是使用value属性获取和设置内容
+    *
+    *           textarea 比较特殊,两个都支持
+    *
+    * */
+//    var ipts = document.querySelectorAll('input');
+//    ipts[0].value = '李狗蛋和小红相爱，生个孩子叫李红蛋';
+//    ipts[1].value = '随你'
+
+//    var txt = document.querySelector("#txt");
+//    console.log(txt.innerHTML);
+//    console.log(txt.value);
+
+//    txt.innerHTML = '新的内容'
+//    txt.value = '最新的么荣'
+
+
+    /*
+    *  非标单元素
+    * */
+    
+    var box = document.getElementById("box");
+//    console.log(box.innerHTML);
+//    box.innerHTML='<a href="#">后来他们都死了</a>'
+
+//    console.log(box.innerText);
+//    box.innerText = '<a href="#">后来他们都死了</a>';
+    
+    console.log(box.textContent);
+    box.textContent = '<a href="#">后来他们都死了</a>';
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+        
+    </style>
+</head>
+<body>
+<input type="button" value="变胖" id="btn1"/>
+<input type="button" value="变高" id="btn2"/>
+<input type="button" value="变帅" id="btn3"/>
+<div id="box">我爱中华人民共和国</div>
+<script>
+
+    /*
+    *  如果一个属性就封装一个函数，太麻烦了
+    *
+    *       如果能把要修改的属性也封装成参数，就可以解决这个问题
+    * */
+
+    function animate(element,target,attr){
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            // 1 获取要修改的属性的当前值
+            var current = parseInt(window.getComputedStyle(element)[attr]);
+            console.log(current);
+            // 2 变宽一点
+            // 每次改变剩下宽度的1/10
+            var step = (target - current) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            current += step;
+            // 3 修改回去 -- 跟上一个版本相比，设置的属性就是动态得到的
+            element.style[attr] = current +'px';
+            // 4 停下
+            if(current == target){
+                clearInterval(element.timer);
+            }
+
+        },20);
+    }
+
+//    animate(box,800,'width');
+//
+//    box.style['width'] = current + 'px';
+//
+//    var obj = {};
+//
+//    obj['name'] = '里苟安';
+//    obj['age'] = 18;
+
+    var btn1 = document.getElementById('btn1');
+    var btn2 = document.getElementById('btn2');
+    var btn3 = document.getElementById('btn3');
+    var box = document.getElementById('box');
+
+    btn1.onclick= function(){
+        animate(box,800,'width');
+    }
+    btn2.onclick= function(){
+        animate(box,400,'height');
+    }
+    btn3.onclick= function(){
+        animate(box,100,'fontSize');
+    }
+
+</script>
+</body>
+</html>

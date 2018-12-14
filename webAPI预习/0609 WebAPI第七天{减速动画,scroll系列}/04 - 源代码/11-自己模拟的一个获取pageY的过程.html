@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<div style="position: absolute;top: 0;left: 600px;height: 3000px;width: 100px;background-color:#f00;"></div>
+<script>
+
+    /*
+    *  发现：
+    *       pageY 在ie8不兼容
+    *
+    *       自己模拟
+    *       pageY = clientY + document.documentElement.scrollTop
+    * */
+
+    /**
+     *  根据时间对象兼容的获取pageY
+     * @param e
+     * @returns {Number|*}
+     */
+    function getPageY(e){
+        return e.pageY || e.clientY + document.documentElement.scrollTop;
+    }
+
+    /**
+     * 兼容的获取pageX
+     */
+    function getPageX(e){
+        return e.pageX || e.clientX + document.documentElement.scrollLeft;
+    }
+
+    /**
+     * 兼容的获取事件对象
+     * @param e
+     * @returns {*|Event}
+     */
+    function getEvent(e){
+        return e || window.event;
+    }
+
+    document.onclick = function(e){
+        e = getEvent(e);
+        var pageY = getPageY(e);
+        console.log(pageY);
+    }
+
+</script>
+</body>
+</html>

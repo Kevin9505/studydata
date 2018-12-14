@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box" class="abc" abc="110" data-index="1" data-src="images/02.jpg"></div>
+<script>
+
+    /*
+    *  html属性的分类：
+    *       标准属性
+    *           w3c标准当中规定属性，有特殊作用的属性：比如： id,class,href,src
+    *
+    *       自定义属性
+    *           标准当中没有声明的，程序员自己在使用的过程中需要自己定义的，用来存储特定的数据的属性
+    *           h5标准建议，自定义属性以data-开头
+    *
+    *       js提供了一套操作元素属性的api
+    *
+    *           单词： Attribute  --  属性
+    *
+    *           getAttribute()
+    *
+    *               元素.getAttribute(属性名);
+    *
+    *           setAttribute()
+    *
+    *               元素.setAttribute(属性名,目标值);
+    *           removeAttribute()
+    *
+    *               元素.removeAttribute(属性名);
+    *
+    *
+    *           思考和实践：
+    *               这三个方法可以操作自定义属性，能不能操作标准属性？
+    *
+    * */
+
+//    得到标准属性
+    var box = document.getElementById("box");
+//    console.log(box.id);
+//    console.log(box.className);
+
+//    console.log(box.abc);
+    // 自定义属性是无法通过DOM(预算内宿)对象直接点出来的
+    console.log(box.getAttribute('abc'));
+    console.log(box.getAttribute('data-index'));
+    console.log(box.getAttribute('data-src'));
+
+    box.setAttribute('data-index',"199");
+
+    box.removeAttribute('data-index');
+
+</script>
+</body>
+</html>

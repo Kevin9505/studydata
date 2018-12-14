@@ -1,0 +1,140 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>旋转木马轮播图</title>
+    <link rel="stylesheet" href="css/css.css" />
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+        <ul>
+            <li>
+                <a href="#"><img src="images/slidepic1.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic2.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic3.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic4.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic5.jpg" alt="" /></a>
+            </li>
+        </ul>
+        <div class="arrow" id="arrow">
+            <a href="javascript:;" class="prev" id="arrLeft"></a>
+            <a href="javascript:;" class="next" id="arrRight"></a>
+        </div>
+    </div>
+</div>
+<script src="animate.js"></script>
+<script>
+
+    //每一张图片的位置大小等等的信息
+    var config = [{
+        width: 400,
+        top: 20,
+        left: 50,
+        opacity: 0.2,
+        zIndex: 2
+    }, //0
+        {
+            width: 600,
+            top: 70,
+            left: 0,
+            opacity: 0.8,
+            zIndex: 3
+        }, //1
+        {
+            width: 800,
+            top: 100,
+            left: 200,
+            opacity: 1,
+            zIndex: 4
+        }, //2
+        {
+            width: 600,
+            top: 70,
+            left: 600,
+            opacity: 0.8,
+            zIndex: 3
+        }, //3
+        {
+            width: 400,
+            top: 20,
+            left: 750,
+            opacity: 0.2,
+            zIndex: 2
+        } //4
+    ];
+
+    /*
+    *   需求：
+    *       1 一开始会散开
+    *           有一个数组，配置了每个图片的位置，只要按照这个位置一个一个的移动即可
+    *       2 点击按钮会切换图片
+    *           按钮注册点击事件
+    *               右边的效果：
+    *                   把样式数组，把索引为0的元素，从前面取出来，放到后面
+    *                   再做一次动画
+    * */
+    var lis = document.getElementById('slide').getElementsByTagName('li');
+    var leftBtn = document.querySelector('.prev');
+    var rightBtn = document.querySelector('.next');
+    var flag = true;
+
+    // 1 散开
+    fn();
+    function fn(){
+        for(var i = 0; i < lis.length ; i++){
+            animate_v7(lis[i],config[i],function(){
+                flag = true;
+            });
+        }
+    }
+
+    // 2 点击切换效果
+//    rightBtn.onclick = function(){
+//        animate_v6(lis[0],config[1]);
+//        animate_v6(lis[1],config[2]);
+//        animate_v6(lis[2],config[3]);
+//        animate_v6(lis[3],config[4]);
+//        animate_v6(lis[4],config[0]);
+//    }
+    rightBtn.onclick = function(){
+        if(flag){
+            flag = false;
+            //把样式数组的前面的这个取出来
+            var first = config.shift();
+            //        console.log(fist);
+            // 把取出来的元素，插入到数组的后面
+            config.push(first);
+            //        console.log(config);
+            // 再来把每个li对应的做一次动画
+            //        for(var i = 0; i < lis.length ; i++){
+            //            animate_v6(lis[i],config[i])
+            //        }
+            fn();
+        }
+        
+    }
+
+    leftBtn.onclick  =function(){
+        config.unshift(config.pop());
+//        for(var i = 0; i < lis.length ; i++){
+//            animate_v6(lis[i],config[i])
+//        }
+        fn();
+    }
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        .father {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            overflow: scroll;
+        }
+        .son {
+            width: 60px;
+            height: 60px;
+            /*background-color: #0a0;*/
+            background-image: linear-gradient(red,green,blue,yellow);
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="father">
+    <div class="son"></div>
+</div>
+
+<script>
+
+    /*
+    *  产生滚动条的情况下，是可以把内容滚动出去的，怎么得到这个滚动出去的距离呢？
+    *
+    *       scroll 系列
+    *
+    *       scrollTop
+    *           内容滚动出去的垂直距离
+    *       scrollLeft
+    *           内容滚动出去的水平距离
+    *
+    *       scrollWidth
+    *       scrollHeight
+    *           得到的是：
+    *               如果内容比容器大，得到的是内容的宽高
+    *               否则得到的是自己的宽高(不包括滚动条)
+    *
+    *
+    *  滚动事件
+    *       scroll
+    *
+    *       元素.onscroll = fun
+    * */
+
+    var father = document.getElementsByClassName('father')[0];
+
+//    father.onscroll = function(){
+////        console.log(father.scrollTop);
+//        console.log(father.scrollLeft);
+//    }
+
+    console.log(father.scrollWidth);
+    console.log(father.scrollHeight);
+
+
+</script>
+</body>
+</html>

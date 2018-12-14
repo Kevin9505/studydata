@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="father">
+    <div class="son"></div>
+    <p></p>
+    <ul id="ul">
+        <li>1</li>我叫李狗蛋
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+</div>
+<script>
+
+    /*
+     *  节点：
+     *       节点值的是树形结构中，每个交叉点
+     *
+     *       html的结构树种，每个元素都是节点
+     *
+     *       document的定义里面，但凡是页面上的都是节点
+     *
+     *       页面上有：
+     *           标签  属性  文本
+     *
+     *           文本也是节点的一种
+     *
+     *           元素和节点的关系：
+     *              节点不仅仅是元素、属性、文本，还有别的也是节点
+     *
+     *              元素就是指的标签
+     * */
+
+
+    /*
+     *  根据节点关系对节点进行查找
+     *
+     *       根据父子关系找到对应的节点
+     *
+     *           父节点.childNodes   可以得到所有的子节点
+     *
+     *
+     *       根据父子关系获取所有的子元素
+     *
+     *          父元素.children     可以得到所有的子元素
+     *
+     *
+     *       根据父子关系得到父节点
+     *
+     *          子节点.parentNode   可以得到该节点的父节点
+     *
+     *
+     *      根据兄弟关系获取节点
+     *
+     *          节点.nextSibling  得到的是下一个兄弟节点
+     *
+     * */
+
+    var ul = document.getElementById("ul");
+    console.log(ul.childNodes);
+//
+//    console.log(ul.children);
+//
+//    console.log(ul.parentNode);
+
+    var li1 =ul.childNodes[1];
+    console.log(li1.nextSibling);
+    console.log(li1.nextSibling.nextSibling);
+    console.log(li1.nextElementSibling);//在ie8里面不好使，如果项目要在ie8里面使用，就不能用这个api
+
+
+</script>
+</body>
+</html>

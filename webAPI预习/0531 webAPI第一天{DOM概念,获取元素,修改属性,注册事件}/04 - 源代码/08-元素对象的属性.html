@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="box" class="abc" title="我想起那天夕阳下的奔跑">
+    <a href="http://www.baidu.com">
+        <img src="images/01.jpg" alt="这是一个大美女" id="img"/>
+    </a>
+</div>
+<script>
+
+    /*
+    *  发现：
+    *       直接修改图片的src属性就可以更改图片的路径
+    *
+    *       能不能修改或者获取别的属性？
+    * */
+
+    var div = document.getElementById("box");
+    console.log(div.id);
+    console.log(div.class);//class直接点获取不到 -- 因为class是保留字，所以在命名属性的时候，刻意的避开了，使用了一个className来代替
+    console.log(div.className);// 比较特殊的需要记忆的，其他的都是可以知己使用对象点的方式得到
+    console.log(div.title);
+    var a = document.getElementsByTagName("a");
+    console.log(a[0]);// 使用元素的伪数组的时候，记得每次使用元素对象，都要先从伪数组中先根据索引得到元素对象
+    console.log(a[0].href);
+//    a.push('abc');//因为push是数组的方法，只要是数组都可以调用，如果调用不了，说明该对象不是数组，也就是，根据标签名得到的对象的集合，并不是数组
+
+    var img = document.getElementById("img");
+    console.log(img.alt);
+</script>
+</body>
+</html>

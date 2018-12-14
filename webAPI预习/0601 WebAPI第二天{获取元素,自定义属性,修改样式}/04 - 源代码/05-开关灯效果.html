@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .box {
+            width: 400px;
+            height: 300px;
+            background-color: #ccc;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="button" id="close" value="关灯"/>
+    <input type="button" id="open" value="开灯"/>
+</div>
+<script>
+
+    /*
+    *   点击按钮的时候，修改body背景颜色
+    *
+    *       body.style.backgroundColor = 颜色
+    *
+    * */
+    // 获取按钮
+    var closeBtn = document.getElementById("close");
+    var openBtn = document.getElementById("open");
+    var body = document.getElementsByTagName('body')[0];
+    //注册事件
+    closeBtn.onclick = function(){
+        // 修改body的背景颜色为黑色
+        body.style.backgroundColor = '#000';
+    }
+    openBtn.onclick = function(){
+        body.style.backgroundColor = "#fff";
+    }
+
+
+</script>
+</body>
+</html>

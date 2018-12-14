@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<a href="http://www.baidu.com">百度</a>
+<a href="javascript:;">百度2</a>
+<a href="javascript:void(0);">百度3</a>
+<script>
+
+    /*
+    * 了解事件对象中有哪些有价值的信息
+    *
+    *       type            事件的类型
+    *
+    *       target          事件目标/事件源
+    *
+    *           之前学过this也是事件源，但是在ie8里面，attachEvent的方式注册的事件，事件处理程序并不是this就是事件源，里面的this是指向 window
+    *
+    *           如果在attachEvent里面得到事件源，
+    *           事件对象.target也不能得到事件源
+    *
+    *       srcElement    这个在ie8里面可以得到事件源
+    *
+    *
+    *       preventDefault()
+    *               阻止默认行为
+    *
+    *               默认行为： a标签在点击的时候，会调整
+    *               submit在点击的时候会提交
+    *
+    *
+    *               阻止默认行为的方式：
+    *                   1 e.preventDefault()
+    *                   2 return false;
+    *
+    *                   a标签有一个特殊的阻止跳转
+    *                       href='javascript:void(0);'
+    * */
+
+//    var box =document.getElementById("box");
+    
+//    box.onclick = function(e){
+//        console.log(e.type);
+//    }
+//    box.onmouseover = function(e){
+//        console.log(e.type);
+//    }
+
+//    box.onclick = function(e){
+//        console.log(e);
+//        console.log(e.target);
+//        console.log(this);
+//    }
+
+//    box.addEventListener('click',function(){
+//        console.log(this);
+//    },false);
+
+//    box.attachEvent("onclick",function(e){
+////        console.log(this.id);
+////        this的指向是window
+//
+////        console.log(e.target);
+////        console.log(e.srcElement.id);
+//    })
+
+
+//    var a = document.querySelector('a');
+//    a.onclick = function(e){
+////        e.preventDefault();
+//        return false;
+//    }
+
+</script>
+</body>
+</html>

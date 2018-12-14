@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        .yeye {
+            width: 400px;
+            height: 400px;
+            background-color: #00aa00;
+        }
+        .baba {
+            width: 300px;
+            height: 300px;
+            background-color: #f00;
+        }
+        .sunzi {
+            width: 200px;
+            height: 200px;
+            background-color: #00f;
+            position: absolute;
+            left: 500px;
+        }
+        
+    </style>
+</head>
+<body>
+<div class="yeye">
+    <div class="baba">
+        <div class="sunzi"></div>
+    </div>
+</div>
+<script>
+
+    /*
+    *   事件发生的时候，会有一个事件的传播的过程
+    *
+    *       1 事件的捕获阶段  --  从外到内
+    *       2 事件的目标阶段  --  找到事件触发对象的时候
+    *       3 事件的冒泡阶段  --  从内到外
+    *
+    *
+    *   如果事件传播到每一个节点的时候，如果这个节点也注册了同样的事件，该事件的所绑定的函数也会被执行
+    *       如果设置了函数的执行阶段，就会在对应的阶段执行
+    *
+    *           如果是  false设置  就是在冒泡阶段执行
+    *
+    *           如果是  true 设置  就是在捕获阶段执行
+    *
+    * */
+
+    var yeye = document.querySelector('.yeye');
+    var baba = document.querySelector('.baba');
+    var sunzi = document.querySelector('.sunzi');
+
+    // 先使用false的方式注册事件
+    yeye.addEventListener('click',function(){
+        console.log('我是你爷爷');
+    },false);
+    baba.addEventListener('click',function(){
+        console.log('我是你爸爸');
+    },false);
+    sunzi.addEventListener('click',function(){
+        console.log('我是你孙子');
+    },false);
+
+
+//    yeye.addEventListener('click',function(){
+//        console.log('我是你爷爷');
+//    },true);
+//    baba.addEventListener('click',function(){
+//        console.log('我是你爸爸');
+//    },true);
+//    sunzi.addEventListener('click',function(){
+//        console.log('我是你孙子');
+//    },true);
+
+
+</script>
+</body>
+</html>

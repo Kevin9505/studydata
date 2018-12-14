@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="选中榴莲"/>
+<select name="" id="">
+    <option value="">西瓜</option>
+    <option value="">苹果</option>
+    <option value="">香蕉</option>
+    <option value="">榴莲</option>
+</select>
+<script>
+
+    /*
+    *  点击按钮，设置榴莲被选中
+    *
+    *   思路：
+    *       点击的时候，给榴莲设置selected属性为true
+    * */
+    //获取元素
+    var btn  = document.getElementsByTagName("input");
+    var opts = document.getElementsByTagName("option");
+    //=注册点击事件
+    // 如果使用伪数组来注册事件，是不对的，必须把伪数组中的元素对象，拿出来，才能注册事件
+    // 事件源.on+事件类型 = 处理程序
+    btn[0].onclick = function(){
+        // 设置榴莲被选中
+        opts[3].selected = true;
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .yeye {
+            width: 400px;
+            height: 400px;
+            background-color: #f00;
+            position: relative;
+        }
+        .baba {
+            width: 300px;
+            height: 300px;
+            background-color: #0a0;
+            position: absolute;
+            left: 100px;
+        }
+        .sunzi {
+            width: 200px;
+            height: 200px;
+            background-color: #00f;
+            margin-left: 100px;
+            position: absolute;
+            left: 100px;
+            margin-top: 100px;
+            top: 100px;
+            border: 10px solid #000;
+            padding-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="yeye">
+    <div class="baba">
+        <div class="sunzi"></div>
+    </div>
+</div>
+
+<script>
+
+    /*
+    *  offset
+    *       offsetParent    元素最近的一个定位的前代元素
+    *                       如果前代元素都没有定位，其offsetParent是body或者html
+    *       offsetLeft      元素相对于其offsetParent元素的左上角的水平位移
+    *           offsetLeft受margin和left的影响
+    *
+    *       offsetTop       元素相对于其offsetParent元素的左上角的垂直位移
+    *
+    *       offsetWidth     元素的实际宽度
+    *       offsetHeight    元素的实际高度
+    *
+    *               盒子模型：
+    *                   元素的实际宽高 = border + padding + content
+    * */
+
+
+
+    var yeye = document.querySelector('.yeye');
+    var baba = document.querySelector('.baba');
+    var sunzi = document.querySelector('.sunzi');
+
+//    console.log(yeye.offsetParent);
+//    console.log(baba.offsetParent);
+//    console.log(sunzi.offsetParent);
+
+//    console.log(yeye.offsetLeft);
+//    console.log(baba.offsetLeft);
+//    console.log(sunzi.offsetLeft);
+    
+//    console.log(yeye.offsetTop);
+//    console.log(baba.offsetTop);
+//    console.log(sunzi.offsetTop);
+
+    console.log(yeye.offsetWidth);
+    console.log(baba.offsetWidth);
+    console.log(sunzi.offsetWidth);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: aqua;
+      border: 1px solid #000;
+      margin: 200px auto;
+    }
+
+    .redCls {
+      background-color: red;
+    }
+    .hitCls {
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 
+    dom.classList 类数组
+    add 方法 添加一个新的class 
+    remove   移除    
+    toggle   判断
+    contains 切换
+    
+   -->
+  <div class="hitCls">
+    <button id="add">添加class</button>
+    <button id="remove">移除class</button>
+    <button id="toggle">切换class</button>
+    <button id="contains">判断class</button>
+  </div>
+  <script>
+
+    // 获取dom元素 
+    var div = document.querySelector("div");
+    var addBtn = document.querySelector("#add");
+    var removeBtn = document.querySelector("#remove");
+    var toggleBtn = document.querySelector("#toggle");
+    var containsBtn = document.querySelector("#contains");
+    
+    addBtn.onclick = function () {
+      // 给div 添加一个新的class 
+      // div.className=div.className+" redCls";
+
+      // classList 是h5 新出的一个对象 
+      // 存放了dom元素的 class 数组
+
+      div.classList.add("redCls");
+      // console.log(div.classList.length);
+
+    }
+
+    removeBtn.onclick = function () {
+      div.classList.remove("redCls");
+    }
+
+    toggleBtn.onclick = function () {
+      /* 
+      切换
+      有就删除 没有就添加 
+       */
+      div.classList.toggle("redCls");
+    }
+
+    containsBtn.onclick=function(){
+      // hasClass()
+      alert(div.classList.contains("redCls"));
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="删除子节点" id="btn"/>
+<input type="button" value="插入子节点" id="btn2"/>
+<input type="button" value="克隆子节点" id="btn3"/>
+<ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<ul id="u2">
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+</ul>
+<script>
+
+    /*
+    *  DOM做的事情
+    *       对页面上的元素进行   增删改查
+    *
+    *
+    *
+    *
+    *       appendChild
+    *
+    *           父节点.appendChild(子节点);
+    *               作用是：将子节点作为父节点的最后一个子节点
+    *
+    *
+    *       删除节点
+    *           removeChild
+    *
+    *               用法：
+    *                   父节点.removeChild(子节点);
+    *
+    *                   注意： 只能是父子关系才能移除，否则报错
+    *
+    *
+    *      修改节点：
+    *
+    *           修改属性
+    *           改样式
+    *           改内容
+    *           改位置
+    *
+    *
+    *           insertBefore
+    *
+    *               用法：
+    *
+    *                   父节点.insertBefore(新节点,旧节点);
+    *
+    *
+    *   cloneNode
+    *
+    *       克隆节点
+    *
+    *           复制一个节点
+    *
+    *               node.cloneNode(是否深度克隆);
+    *
+    *                   深度克隆：   就是否是克隆后代
+    *
+    *                   注意：克隆是完全一模一样的，如果有id，需要手动修改一下
+    *
+    * */
+
+    var ul = document.getElementById("ul");
+    var u2 = document.getElementById("u2");
+    var btn = document.getElementById("btn");
+
+//    btn.onclick = function(){
+//        // 删除第3个li
+////        var li3 = ul.children[2];
+////        console.log(li3);
+////        ul.removeChild(li3);
+//
+////        var li8 = u2.children[2];
+////        ul.removeChild(li8);
+//    }
+
+
+    /*
+    *  插入节点
+    * */
+    document.getElementById("btn2").onclick = function(){
+        // 先创建一个li，出入到第三个之前
+//        var li = document.createElement('li');
+//        li.innerHTML = 'abc';
+//        //插入
+//        ul.insertBefore(li,ul.children[2]);
+
+        // 尝试插入一个已经存在的元素
+        var li8 = u2.children[2];
+        ul.insertBefore(li8,ul.children[2]);
+    }
+
+
+    /*
+    *  演示克隆节点
+    *       node.cloneNode(true|false)
+    * */
+
+//    var copy = ul.cloneNode(false);
+    var copy = ul.cloneNode(true);
+    copy.id = 'abc';
+    console.log(copy);
+    document.body.appendChild(copy)
+</script>
+</body>
+</html>

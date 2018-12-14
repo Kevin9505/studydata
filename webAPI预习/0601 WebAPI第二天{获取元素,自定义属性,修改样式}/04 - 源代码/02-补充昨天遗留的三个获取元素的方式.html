@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div></div>
+<!--<form action="" method="get">-->
+    <!--<input type="text" name="userName"/>-->
+    <!--<input type="text" name="age"/>-->
+    <!--<input type="submit" value="提交"/>-->
+<!--</form>-->
+
+<!--<input type="text" name="abc"/>-->
+<!--<input type="text" name="abc"/>-->
+<!--<input type="text" name="abc"/>-->
+
+<div id="box"></div>
+<div class="abc">1</div>
+<div class="abc">2</div>
+<div class="abc">3</div>
+<div class="abc">4</div>
+<div>
+    <div class="abc">5</div>
+    <div class="abc">6</div>
+    <div class="abc">7</div>
+</div>
+<script>
+
+    /*
+    *   document.getElementsByName()
+    *
+    *       返回值： 伪数组
+    *
+    *       // 作业：试试这个方法能不能被父元素调用
+    *
+    *       根据name属性获取
+    *
+    *           name属性的作用 ：
+    *               1 可以让单选按钮互斥
+    *               2 通常用的最多的是，在点击submit按钮的时候
+    *                   会自动的收集form表单里面所有带有name属性的表单元素
+    *                   以name属性作为键，表单的值作为值，提交到服务器
+    *
+    *           既然name属性一般作用在表单元素中--》该方式是根据name属性获取元素，就不会很常用
+    *
+    *
+    *
+    *   document.querySelector(selector);
+    *
+    *           返回值： 这个方法不管使用什么选择器，他都只会返回一个满足条件的元素
+    *
+    *       根据选择器查找
+    *           只要是css的选择器，就可以丢到实参的位置
+    *
+    *  document.querySelectorAll(selector);
+    *           返回值：
+    *               伪数组,即使给的是id选择器
+    *
+    *
+    *
+    *
+    *
+    * */
+
+//    var names = document.getElementsByName('abc');
+//    console.log(names);
+
+
+//    var box = document.querySelector("#box");
+//    console.log(box);
+
+//    var abcs = document.querySelector(".abc");
+//    var abcs = document.querySelectorAll(".abc");
+//    console.log(abcs);
+
+//    var box = document.querySelectorAll("#box");
+//    console.log(box);
+
+
+//    var cs1 = document.querySelectorAll("div > div.abc");
+//    var cs2 = document.querySelector("div > div.abc");
+//    console.log(cs1);
+//    console.log(cs2);
+</script>
+</body>
+</html>

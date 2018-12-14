@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .section {
+      height: 400px;
+      font-size: 100px;
+      text-align: center;
+      line-height: 400px;
+      font-family: 华文彩云;
+
+      /* 背景固定   */
+      background-attachment: fixed;
+      /* 
+      实现视差案例的 原理 
+      使用了 背景固定  background-attachment: fixed;
+
+      背景移动的  backgroundPosition 
+       */
+    }
+
+    .s2 {
+      background-image: url("./images/1.jpg");
+    }
+
+    .s4 {
+      background-image: url("./images/2.jpg");
+    }
+
+    .s6 {
+      background-image: url("./images/3.jpg");
+    }
+
+    .s8 {
+      background-image: url("./images/4.jpg");
+    }
+  </style>
+</head>
+
+<body>
+  <div class="section s1">
+    拖拉机
+  </div>
+  <div class="section s2"></div>
+  <div class="section s3">
+    韩红人偶
+  </div>
+  <div class="section s4"></div>
+  <div class="section s5">
+    麻辣香锅
+  </div>
+  <div class="section s6"></div>
+  <div class="section s7">
+    凤姐抱枕
+  </div>
+  <div class="section s8"></div>
+</body>
+
+</html>

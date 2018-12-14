@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<img src="images/tianshi.gif" style="position: absolute" alt=""/>
+<div></div>
+<script>
+
+    /*
+    *  图片是在鼠标移动的时候改变位置的
+    *
+    *       相应鼠标移动的事件
+    *               mousemove
+    *
+    *   只要在鼠标移动的时候，获取鼠标的位置，设置给图片，图片就能跟着鼠标一起移动
+    *               
+    *
+    *   一般来说，只要是希望在页面中任何位置都可以触发的事件，一般是给document注册
+    *
+    *
+    * */
+    var img = document.querySelector('img');
+    document.onmousemove = function(e){
+        // 获取鼠标的位置，设置给图片
+        var x = e.clientX;
+        var y = e.clientY;
+        // 设置给图片
+        img.style.top = y + "px";
+        img.style.left = x + 'px';
+    }
+
+//    document.querySelector('div').onmousemove = function(){
+//        console.log(456);
+//    }
+
+//    document.onclick = function(){
+//        console.log(789);
+//    }
+//
+
+
+</script>
+</body>
+</html>

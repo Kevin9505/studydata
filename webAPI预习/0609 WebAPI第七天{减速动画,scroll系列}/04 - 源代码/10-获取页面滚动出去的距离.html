@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .box {
+            width: 300px;
+            height: 3000px;
+            background-image: linear-gradient(red,green,blue,black);
+        }
+
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    /*
+    *  在页面滚动的时候，获取页面滚动出去的距离
+    *
+    *    考虑：
+    *       谁是页面的容器？
+    *           body，document, html ,window
+    *
+    *       用window的滚动来获取是最合适的
+    *
+    *       高版本的浏览器支持的是：
+    *           window.pageXOffset/pageYOffset
+    *
+    *       如果要兼容低版本的浏览器：
+    *           document.documentElement.scrollTop/scrollLeft
+    *
+    *       公式：
+    *           pageY = clientY + window.pageYOffset(document.documentElement.scrollTop)
+    * */
+
+//    document.body.onscroll = function(){
+//        console.log(123);
+//    }
+//    document.onscroll = function(){
+//        console.log(456);
+//    }
+
+    // 获取html元素的快速的方式
+//    console.log(document.documentElement);
+//    console.log(document.html);
+
+//    document.documentElement.onscroll = function(){
+//        console.log(123);
+//    }
+
+//    window.onscroll = function(){
+//        console.log(123);
+//    }
+
+    // 开始获取页面滚动出去的距离
+    window.onscroll = function(){
+//        console.log(document.documentElement.scrollTop);
+//        console.log(window.pageXOffset);
+//        console.log(window.pageYOffset);
+    }
+
+
+</script>
+</body>
+</html>

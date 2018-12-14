@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+
+    /**
+     * 一般是函数的功能： 兼容的注册事件
+     * @param element 要注册事件的元素对象
+     * @param type      要注册的事件类型
+     * @param callback  事件的处理程序
+     */
+    function addEvent(element,type,callback){
+        if(element.addEventListener != undefined){
+            element.addEventListener(type,callback,false);
+        }else if( element.attachEvent != undefined){
+            element.attachEvent('on'+type,callback);
+        }
+    }
+
+    var box = document.getElementById("box");
+    
+    addEvent(box,'click',function(){
+        console.log('我被别人打了');
+    });
+
+    addEvent(box,'click',function(){
+        console.log('我又被打了');
+    });
+    
+    addEvent(box,'mouseover',function(){
+        console.log('我被别人摸了');
+    };
+
+</script>
+</body>
+</html>

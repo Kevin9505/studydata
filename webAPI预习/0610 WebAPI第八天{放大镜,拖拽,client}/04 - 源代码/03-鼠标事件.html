@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    /*
+    *  mousedown 鼠标按下的一瞬间触发
+    *
+    *  mouseup   鼠标松开的一瞬间触发
+    *
+    *  click        点击包括按下和松开两个过程
+    *
+    * */
+    document.onmousedown = function(){
+        console.log(123);
+    }
+    document.onmouseup = function(){
+        console.log(1456);
+    }
+
+    document.onclick = function(){
+        console.log(789);
+    }
+
+</script>
+</body>
+</html>

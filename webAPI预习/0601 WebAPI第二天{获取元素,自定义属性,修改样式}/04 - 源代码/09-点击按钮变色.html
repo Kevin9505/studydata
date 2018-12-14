@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="点击"/>
+<input type="button" value="点击"/>
+<input type="button" value="点击"/>
+<input type="button" value="点击"/>
+<input type="button" value="点击"/>
+<input type="button" value="点击"/>
+<input type="button" value="点击"/>
+<script>
+
+    /*
+    *  点击按钮的时候，修改该按钮的背景颜色
+    *
+    *       只有一个按钮的背景是有颜色的，其他的所有的按钮都是没有背景颜色
+    *
+    * */
+
+    /// 获取所有的按钮
+    var btns = document.getElementsByTagName('input');
+    // 遍历伪数组，注册事件
+    for(var i = 0; i < btns.length ; i++){
+        btns[i].onclick = function(){
+            // 如何得到点击的按钮
+            // 当不容易得到触发事件的对象  --  事件源
+            // 在事件处理程序里面，想要得到触发事件的对象(事件源)
+            // 通过this可以得到事件源  -->  在事件处理程序中，this指向事件源
+//            this.style.backgroundColor = 'red';
+
+
+
+            //--------------
+//            如果需要让其他的按钮，都是没有颜色的
+//            只有自己是有颜色的
+            // 不管其他的按钮有多少是有颜色的，统一都变成没有颜色
+            for(var j = 0; j < btns.length ; j++){
+                btns[j].style.backgroundColor = '';
+            }
+            // 再把自己变得有颜色 ---> 排他
+            this.style.backgroundColor = 'red';
+        }
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    /*
+    *  创建节点
+    *
+    *       document.write
+    *
+    *       innerHTML
+    *           覆盖的时候可以用
+    *           结构复杂的时候可以用
+    *
+    *           父元素.innerHTML = '标签格式的字符串';
+    *
+    *       document.createElement()
+    *           不覆盖
+    *           结构相对简单的时候
+    *
+    *           var element = document.createElement(标签名);
+    *           父元素.appendChild(element);
+    *
+    *   追加
+    *
+    *       appendChild
+    *
+    *           父元素.appendChild(element);
+    *               作用： 把element作为父元素的最后一个子节点
+    *   插入
+    *
+    *       insertBefore
+    *
+    *           父元素.insertBefore(新元素,旧元素);
+    *
+    *           将新元素作为父元素的子元素，插入在旧元素之前
+    *
+    *   删除
+    *
+    *       removeChild
+    *
+    *           父元素.removeChild(子元素);
+    *
+    *    替换
+    *
+    *       replaceChild
+    *
+    *           父元素.replaceChild(新,旧);
+    *
+    *               用一个新元素替换旧元素
+    *   克隆
+    *
+    *       cloneNode
+    *
+    *           克隆节点
+    *
+    *               node.cloneNode(是否深度克隆)
+    *
+    *                   深度克隆：连后代一起复制
+    *
+    *   查
+    *       根据节点关系差
+    *
+    *           父子
+    *               * parentNode
+    *
+    *               * children
+    *
+    *               childNodes
+    *           兄弟
+    *
+    *
+    *
+    *
+    *  增
+    *       innerHTML、document.createElement
+    *
+    *  删    removeChild   innerHTML=""
+    *
+    *
+    *  改
+    *       改属性     标准属性,自定义属性,setAttribute.....
+    *       改样式     className,style
+    *       改内容     innerHTML/innerText/value
+    *       改位置     appendChild/insertBefore/replaceChild
+    *
+    *  查    根据id，根据标签名,根据类名,根据name属性，根据选择器
+    *        节点关系
+    *
+    * */
+
+</script>
+</body>
+</html>

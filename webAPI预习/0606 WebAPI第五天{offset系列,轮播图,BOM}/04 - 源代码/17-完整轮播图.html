@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .box {
+            width: 730px;
+            height: 454px;
+            padding: 8px;
+            border: 1px solid green;
+            margin: 100px auto;
+        }
+
+        .inner {
+            position: relative;
+            overflow: hidden;
+            height: 454px;
+        }
+
+        #imglist {
+            width: 700%;
+            position: absolute;
+            left: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+        .list {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -85px;
+        }
+
+        .list i {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #333;
+            float: left;
+            font-style: normal;
+            line-height: 20px;
+            font-size: 14px;
+            text-align: center;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .list i:last-child {
+            margin-right: 0;
+        }
+
+        .list i.current {
+            background-color: skyblue;
+            color: #fff;
+        }
+
+        .arrow {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            margin-top: -30px;
+        }
+
+        .arrow-left, .arrow-right {
+            width: 30px;
+            height: 60px;
+            position: absolute;
+            font: 20px/60px "consolas";
+            color: #fff;
+            background-color: rgba(0, 0, 0, .3);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="inner" id="inner">
+        <ul id="imglist">
+            <li><a href="#"><img src="images/1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/5.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/6.jpg" alt=""></a></li>
+        </ul>
+        <div class="list">
+
+        </div>
+        <div class="arrow">
+            <span class="arrow-left">&lt;</span>
+            <span class="arrow-right">&gt;</span>
+        </div>
+    </div>
+</div>
+<script src="animate.js"></script>
+<script>
+
+    window.onload = function(){
+        /*
+    *  需求：
+    *       轮播图
+    *           1 自动切换
+    *           2 点击按钮切换
+    *           3 序号切换
+    *           4 鼠标移动到图片上面，停止自动轮播
+    *
+    * */
+    // 获取元素对象
+    var box =document.getElementById('box');
+    var ul = document.querySelector("#imglist");
+    var list = document.querySelector('.list');
+    var leftBtn = document.querySelector('.arrow-left');
+    var rightBtn = document.querySelector('.arrow-right');
+    // 获取图片的宽度
+    var imgWidth = ul.children[0].offsetWidth;//li的宽度和图片的宽度是一样宽的
+
+    // ------------------------------------
+    // 1 序号轮播
+    //  1.1 根据图片的张数，动态生成序号'
+    // 1.1.1遍历ul的子元素的伪数组，根据个数，生成i标签，生成序号
+//    var html = '';
+//    for(var i = 0; i < ul.children.length ; i++){
+//        html += '<i>'+ (i+1) +'</i>';
+//    }
+//    list.innerHTML = html;
+    //优化过后的
+    var html = [];
+    for(var i = 0; i < ul.children.length ; i++){
+        html.push('<i>'+ (i+1) +'</i>');
+    }
+    list.innerHTML = html.join("");
+    // 1.1.2 让一开始的第一个i标签长得跟其他不一样
+    list.children[0].className = 'current';
+    /*
+    *  把鼠标放到序号上面，切换对应的图片
+    *
+    *       万一将来图片的张数不固定，序号的个数要和图片的张数一致，可以根据图片的张数动态生成i标签，生成序号
+    * */
+
+    // 1.2 给所有的序号注册鼠标的移入事件
+    for(var j = 0; j < list.children.length ; j++){
+        list.children[j].index = j;
+        list.children[j].onmouseover = mouseOverHandle;
+    }
+    function mouseOverHandle(){
+        // 获取当前的图片的索引
+        // 得到图片的宽度
+        // 计算ul所在的位置
+        var target = this.index * imgWidth * -1;
+        // 要把currentIndex和当前的图片的索引同步
+        currentIndex = this.index;
+        // 设置ul的位置
+        animate(ul,target);
+        // 控制序号的样式
+        for(var j = 0; j < list.children.length ; j++){
+//            list.children[j].className = '';
+            list.children[j].removeAttribute('class');
+        }
+        this.className = 'current';
+    }
+
+
+    // ------------------------------------------------
+
+    // 2.1 生成一个跟第一张图片一模一样的放到ul的最后面
+    // 采用克隆的方式把第一张，克隆一份，放到最后
+    var last = ul.children[0].cloneNode(true);
+    ul.appendChild(last);
+
+    // 存储当前图片的索引的变量
+    var currentIndex = 0;
+    // 2.2 点击按钮切换
+    rightBtn.onclick = moveRight;
+
+    function moveRight(){
+        //判断是否最后一张，如果是，切换到第一张
+        if(currentIndex == ul.children.length - 1){
+            ul.style.left = 0;
+            currentIndex = 0;
+        }
+
+        // 计算ul的位置，设置ul的位置
+        currentIndex++;
+        // 计算ul的位置
+        var target = currentIndex * imgWidth * -1;
+        // 设置ul的位置
+        animate(ul,target);
+        // 处理小圆点
+        for(var i = 0; i < list.children.length ; i++){
+            list.children[i].removeAttribute('class');
+        }
+        // 要根据索引得到想要的原点
+        if(currentIndex == ul.children.length - 1){
+            //让用户认为这是第一张，就应该让第一个原点变得不一样
+            list.children[0].className = 'current';
+        }else{
+            list.children[currentIndex].className = 'current';
+        }
+    }
+
+    leftBtn.onclick = function(){
+        if(currentIndex == 0){
+            //切换到最后一张
+            var temp = (ul.children.length - 1) * imgWidth * -1;
+            ul.style.left = temp + 'px';
+            currentIndex = ul.children.length - 1;
+        }
+        // 计算ul的位置，设置ul的位置
+        currentIndex--;
+        // 计算ul的位置
+        var target = currentIndex * imgWidth * -1;
+        // 设置ul的位置
+        animate(ul,target);
+        // 处理小圆点
+        for(var j = 0; j < list.children.length ; j++){
+            list.children[j].removeAttribute('class');
+        }
+        list.children[currentIndex].className = 'current';
+    }
+
+    //--------------
+//    3 自动轮播
+    //每隔一段时间把向右的逻辑执行一次
+
+    var intervalId = setInterval(moveRight,1500);
+
+    //4 ------------------------
+    //  4 停止自动轮播
+    box.onmouseover = function(){
+        clearInterval(intervalId);
+    }
+    box.onmouseout = function(){
+        //继续自动轮播
+        intervalId = setInterval(moveRight,1500);
+    }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        input {
+            width: 50px;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 100px auto;
+            /*为了看到效果，将盒子默认旋转一个角度*/
+            /*让子元素保留3d变换之后的效果*/
+            transform-style: preserve-3d;
+
+            /*添加景深效果*/
+            perspective: 0px;
+            /*设置观察的坐标：默认在当前立方体的正前方*/
+            perspective-origin: 0px 0px;
+        }
+
+        .box>div {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.9;
+            font-size: 30px;
+        }
+
+         ::input-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .front {
+            background-color: #ff1703;
+        }
+
+        .back {
+            background-color: #ffc629;
+        }
+
+        .left {
+            background-color: #53ff27;
+        }
+
+        .right {
+            background-color: #18ffe4;
+        }
+
+        .top {
+            background-color: #0c00ff;
+        }
+
+        .bottom {
+            background-color: #ff21cb;
+        }
+        /*将第一个div前移*/
+
+        .front {
+            transform: translateZ(100px);
+        }
+        /*第二个div后移*/
+
+        .back {
+            transform: translateZ(-100px) rotateY(180deg);
+            /*旋转会影响当前元素所在的坐标系：强烈建议：先移动再旋转*/
+            /*transform: rotateY(180deg) translateZ(100px);*/
+        }
+
+        .left {
+            transform: translateX(-100px) rotateY(-90deg);
+        }
+
+        .right {
+            transform: translateX(100px) rotateY(90deg);
+        }
+
+        .top {
+            transform: translateY(-100px) rotateX(90deg);
+        }
+
+        .bottom {
+            transform: translateY(100px) rotateX(-90deg);
+        }
+
+        .tool {
+            margin: 0 auto;
+            text-align: left;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            border: 1px solid #000;
+        }
+
+        body{
+        	perspective: 1000px;
+        }
+
+        h2{
+        	text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tool">
+        <p>
+            <h3 id="translate3dTitle">3D移动</h3>
+            x <input type="number" value=0 id="lateX"> y <input type="number" value=0 id="lateY"> z
+            <input type="number" value=0 id="lateZ">
+        </p>
+        <p>
+            <h3 id="rotate3dTitle">3D旋转</h3>
+            x <input type="number" value=1 id="rotateX"> y <input type="number" value=1 id="rotateY"> z
+            <input type="number" value=0 id="rotateZ"> deg
+            <input type="number" value=0 id="rotatedeg">
+        </p>
+        <p>
+            <h3 id="scale3dTitle">3D缩放</h3>
+            x <input type="number" value=1 id="scale3dX"> y <input type="number" value=1 id="scale3dY"> z
+            <input type="number" value=1 id="scale3dZ">
+        </p>
+
+    </div>
+    <h2>视距为1000px</h2>
+    <div class="box">
+        <div class="front">前面</div>
+        <div class="back">后面</div>
+        <div class="left">左边</div>
+        <div class="right">右边</div>
+        <div class="top">上面</div>
+        <div class="bottom">下面</div>
+    </div>
+    <script>
+        var inps = document.querySelectorAll('input[type=number]');
+        // 获取目标元素
+        var box = document.querySelector('.box');
+        for (var i = 0; i < inps.length; i++) {
+            var element = inps[i];
+            // 绑定事件
+            element.oninput = function () {
+                var tmpInps = document.querySelectorAll('input[type=number]');
+                // 获取所有的数字
+                var arr = [];
+                for (var j = 0; j < tmpInps.length; j++) {
+                    var tmpelememt = tmpInps[j];
+                    arr.push(tmpelememt.value);
+                }
+                // 把值打印到屏幕上  shift 删除数组第一行
+                var translate = arr.shift() + "px," + arr.shift() + "px," + arr.shift() + "px";
+                var rotate = arr.shift() + "," + arr.shift() + "," + arr.shift() + "," + arr.shift() + "deg";
+                var scale = arr.shift() + "," + arr.shift() + "," + arr.shift() + "";
+                console.log("translate3d(" + translate + ") rotate3d(" + rotate + ") scale3d(" + scale + ")");
+
+                // 把值设置到对应的属性里
+                box.style.transform = "translate3d(" + translate + ") rotate3d(" + rotate + ") scale3d(" + scale + ")";
+                document.querySelector('#translate3dTitle').innerHTML = "3D移动 " + translate;
+                document.querySelector('#rotate3dTitle').innerHTML = "3D旋转 " + rotate;
+                document.querySelector('#scale3dTitle').innerHTML = "3D缩放 " + scale;
+            }
+        }
+    </script>
+</body>
+
+</html>

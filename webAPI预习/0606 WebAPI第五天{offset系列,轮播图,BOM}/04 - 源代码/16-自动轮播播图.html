@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .box {
+            width: 730px;
+            height: 454px;
+            padding: 8px;
+            border: 1px solid green;
+            margin: 100px auto;
+        }
+
+        .inner {
+            position: relative;
+            overflow: hidden;
+            height: 454px;
+        }
+
+        #imglist {
+            width: 700%;
+            position: absolute;
+            left: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+        .list {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -85px;
+        }
+
+        .list i {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #333;
+            float: left;
+            font-style: normal;
+            line-height: 20px;
+            font-size: 14px;
+            text-align: center;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .list i:last-child {
+            margin-right: 0;
+        }
+
+        .list i.current {
+            background-color: skyblue;
+            color: #fff;
+        }
+
+        .arrow {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            margin-top: -30px;
+        }
+
+        .arrow-left, .arrow-right {
+            width: 30px;
+            height: 60px;
+            position: absolute;
+            font: 20px/60px "consolas";
+            color: #fff;
+            background-color: rgba(0, 0, 0, .3);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="inner" id="inner">
+        <ul id="imglist">
+            <li><a href="#"><img src="images/1.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/2.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/3.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/4.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/5.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/6.jpg" alt=""></a></li>
+            <li><a href="#"><img src="images/1.jpg" alt=""></a></li>
+        </ul>
+        <div class="list">
+            <i class="current">1</i>
+            <i>2</i>
+            <i>3</i>
+            <i>4</i>
+            <i>5</i>
+            <i>6</i>
+        </div>
+        <div class="arrow">
+            <span class="arrow-left">&lt;</span>
+            <span class="arrow-right">&gt;</span>
+        </div>
+    </div>
+</div>
+<script src="animate.js"></script>
+<script>
+
+    /*
+     *  左右按钮点击切换图片的功能
+     *       点击右按钮，让图片从小的序号的切换到大的序号
+     *       点击左按钮，反过来
+     * */
+
+    // 获取按钮
+    var leftBtn = document.querySelector('.arrow-left');
+    var rightBtn = document.querySelector('.arrow-right');
+    var ul = document.querySelector('#imglist');
+    //图片的宽度
+    var imgWidth = ul.children[0].children[0].children[0].offsetWidth;
+
+    // 使用一个变量把当前是第几张图片存起来(索引)
+    var currentIndex = 0;
+    // 注册点击事件
+    rightBtn.onclick = moveRight;
+
+    function moveRight() {
+
+        //在进行动画之前，判断，当前是不是已经是最后一张图片(用户认为这是第一张)
+        if (currentIndex == ul.children.length - 1) {
+            // 用户看到的是最后一张，再次点击右边按钮的，用户想看到的是：切换到第二张
+            // 只要在一瞬间把图片切换到第一张，然进行从第一张切换到第二章的动画即可
+            ul.style.left = 0;
+            // 同步索引
+            currentIndex = 0;
+        }
+
+        //让图片序号从小到大切换，也是需要设置ul的位置来控制图片的显示
+        // 获取要显示的图片的索引
+        // 切换到下一张，就应该让索引增加
+        currentIndex++;
+        // 得到图片的宽度
+        // 计算出ul应该在的位置
+        var target = imgWidth * currentIndex * -1;
+        // 设置ul的位置
+//        ul.style.left = target + 'px';
+        animate(ul, target);
+    }
+
+    leftBtn.onclick = function () {
+        //如当前是第一张，用户点击了左按钮，想看到的是： 从第一张，切换到最后一张(其实是倒数第二张)
+        if (currentIndex == 0) {
+            // 把ul设置为最后一张
+            // 计算出ul应该在的位置： 应该是 只剩一张显示在最后，length - 1 张在左边
+            var temp = ( ul.children.length - 1 ) * imgWidth * -1;
+            ul.style.left = temp + 'px';
+            // 同步索引
+            currentIndex = ul.children.length - 1;
+        }
+
+        //让图片序号从小到大切换，也是需要设置ul的位置来控制图片的显示
+        // 获取要显示的图片的索引
+        // 切换到上一张，就应该让索引减少
+        currentIndex--;
+        // 得到图片的宽度
+        // 计算出ul应该在的位置
+        var target = imgWidth * currentIndex * -1;
+        // 设置ul的位置
+//        ul.style.left = target + 'px';
+        animate(ul, target);
+    }
+
+
+    /*
+    *  自动轮播：    说白了，就是每隔一段时间，点击一下右按钮
+    * */
+    setInterval(moveRight,1500);
+</script>
+</body>
+</html>

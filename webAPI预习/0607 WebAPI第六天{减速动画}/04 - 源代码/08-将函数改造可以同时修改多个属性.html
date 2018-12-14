@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+        
+    </style>
+</head>
+<body>
+<input type="button" value="变胖+变高+变帅" id="btn1"/>
+<div id="box">我爱中华人民共和国</div>
+<script>
+
+    /*
+    *  第三个版本：
+    *       目标是：同时修改多个属性
+    *
+    *           比如： 宽度，高度，字体大小
+    *
+    *           因为，修改多个属性，就有多个属性和多个目标值
+    *                   一个键对应一个值
+    *                   多个键值对  ---> 对象的方式把多个键值对管理起来
+    * */
+
+    function animate(element,obj){
+        clearInterval(element.timer);
+        element.timer = setInterval(function(){
+            // 一个属性要做的事情，多个属性，做多次就可以了
+            // 做多次-->循环的做--->多个键值对就存储了多个属性和目标值，只要遍历对象，就能得到所有的属性和目标值
+
+            for(var attr in obj){
+//                console.log(attr);//属性名
+//                console.log(obj[attr]);//属性值 -- 目标值
+
+                //------------- 这部分是我们修改单个属性的代码----------
+                var target = obj[attr];
+                var current = parseInt(window.getComputedStyle(element)[attr]);
+                var step = (target - current) / 10;
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                current += step;
+                element.style[attr] = current +'px';
+                if(current == target){
+                    //发现，当某个一属性到达目标值之后，就把定时器停止了，导致其他的属性没有到达目标值
+                    clearInterval(element.timer);
+                }
+                // ----------------------------------------------------
+
+            }
+            console.log(123);
+        },20);
+    }
+
+    var btn1 = document.getElementById('btn1');
+
+    var box = document.getElementById('box');
+
+    btn1.onclick= function(){
+        animate(box,{
+            width: 800,
+            height: 400,
+            fontSize:100
+        });
+    }
+
+</script>
+</body>
+</html>

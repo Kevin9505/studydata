@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="text"/><br/>
+<input type="submit" />
+<script>
+
+    /*
+    *   用户正在输入的输入框，就会变得跟其他输入不一样
+    *        背景颜色会不一样 -- 高亮
+    * */
+
+    /*
+    *  在用户吧光标点进输入框的时候，就让输入框变得不一样
+    * */
+    var txts = document.querySelectorAll('input[type=text]');
+    console.log(txts);
+    //注册鼠标点进去的事件：  获取焦点事件
+    for(var i = 0; i < txts.length ; i++){
+        txts[i].onfocus = function(){
+//            for(var j = 0; j < txts.length ; j++){
+//                txts[j].style.backgroundColor = '';
+//            }
+            // 当前的输入框要高亮
+            this.style.backgroundColor = 'hotpink';
+        }
+        // 在光标没有在输入框里面的时候，把输入框变成没有颜色
+        txts[i].onblur = function(){
+            this.style.backgroundColor = '';
+        }
+    }
+
+
+</script>
+</body>
+</html>

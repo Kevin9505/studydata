@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+   <ul>
+     <li><a data-src="./static/爆笑虫子.mp4"  href="javascript:;">爆笑虫子</a></li>
+     <li><a data-src="./static/蜡笔小新.mp4" href="javascript:;">蜡笔小新</a></li>
+     <li><a data-src="./static/猫和老鼠.mp4" href="javascript:;">猫和老鼠</a></li>
+   </ul>
+  <video autoplay ></video>
+</body>
+<script>
+  // 获取dom元素
+  var video=document.querySelector("video");
+  var aas=document.querySelectorAll("a");
+  /* 
+  1 给a标签绑定点击事件
+  2 获取a标签的data-src属性
+  3 给视频标签赋值 data-src 赋给视频标签的  src属性 ! 
+   */
+   for (var i = 0; i < aas.length; i++) {
+     var element = aas[i];
+      element.onclick=function(){
+        // 获取data-src属性
+        var src=this.dataset.src;
+        video.src=src;
+      }
+   }
+</script>
+</html>

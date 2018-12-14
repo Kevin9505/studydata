@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+            width: 150px;
+            margin: 100px auto;
+        }
+        li {
+            float: left;
+            width: 40px;
+            text-align: center;
+            font-size: 30px;
+            border:1px solid #000;
+        }
+        .p {
+            width: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+<ul>
+    <li id="h">01</li>
+    <li class="p">:</li>
+    <li id="m">00</li>
+    <li class="p">:</li>
+    <li id="s">03</li>
+</ul>
+<script>
+
+    /*
+    *  需求：
+    *       秒数每隔1秒钟 -1
+    *       分钟每隔1分钟 -1
+    *       小时每隔1小时 -1
+    *
+    *       每隔--> setInterval
+    *
+    * */
+    //获取元素
+    var hEle = document.getElementById('h');
+    var mEle = document.getElementById('m');
+    var sEle = document.getElementById('s');
+
+    //1 每隔1秒，让秒数-1
+    setInterval(function(){
+        // 1.1 获取当前是多少秒
+        var s = parseInt(sEle.innerHTML);
+//        console.log(s);
+        // 1.2 让秒数-1
+        s -= 1;
+        // 1.2.5 如果s小于两位数，要补一个0回来
+//        s = s < 10 ? '0' + s : s;
+        // 1.3 修改回li里面
+        sEle.innerHTML = s < 10 ? '0' + s : s;
+        // 1.4 判断秒数是否小于0，如果小于0，让分钟减少1，让秒数回归59
+        if(s<0){
+            // 1.5 让秒数回到59
+            s = 59;
+            // 1.6 还要把数字修改回页面中
+            sEle.innerHTML = s;
+
+            // 2 让分钟减少1
+            var m = parseInt(mEle.innerHTML);
+            // 2.2 让分钟减少1
+            m -= 1;
+            //判断分钟是否小于10，如果小于10，补一个0
+            // 2.3 设置回分钟
+            mEle.innerHTML = m <10 ? '0'+m : m;
+            // 2.4 判断分钟是否小于0，如果小于0，把小时-1，把分钟变成59
+            if(m < 0){
+                m = 59;
+                mEle.innerHTML = m;
+                // 3 小时减-1
+                var h = parseInt(hEle.innerHTML);
+                h-=1;
+                hEle.innerHTML = h < 10 ? '0' + h : h;
+                // 后面判断h和m和s是否都是0，如果都是0该轮秒杀结束
+            }
+        }
+    },1000);
+
+</script>
+</body>
+</html>

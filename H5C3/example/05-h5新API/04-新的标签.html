@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    range 
+    范围标签  
+    存在兼容性   无法解决 使用传统的插件代替 
+    min 最小
+    max 最大 
+    value 值 
+    step 步长 
+   -->
+
+  <!-- 
+     onchange  只值完全确定了才触发 松开鼠标的时候 
+     oninput  值一改变就触发 不用松开鼠标  
+    -->
+  <h1></h1>
+  <input type="range" min="0" value="0" step="10" max="100">
+  <script>
+    var h1 = document.querySelector("h1");
+    var inp = document.querySelector("input");
+
+    // inp.onchange = function () {
+    //   h1.innerHTML = inp.value;
+    // }
+    inp.oninput = function () {
+      h1.innerHTML = inp.value;
+    }
+
+  </script>
+</body>
+
+</html>

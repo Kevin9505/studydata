@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        div,p,ul {
+            height: 20px;
+        }
+
+        .red {
+            background-color: #f00;
+            font-size: 30px;
+            line-height: 60px;
+        }
+
+    </style>
+</head>
+<body>
+<input type="button" value="生产列表" id="btn"/>
+<div id="father">
+    <div>小明，小红，小刚，今天一起去游泳</div>
+</div>
+<!--<ul>-->
+    <!--<li>1</li>-->
+    <!--<li>2</li>-->
+    <!--<li>3</li>-->
+    <!--<li>4</li>-->
+    <!--<li>5</li>-->
+<!--</ul>-->
+<script>
+
+    /*
+    *   点击按钮的时候在页面上生产一个列表
+    *
+    *
+    *   知识点：
+    *       在页面中动态的创建元素
+    *
+    *       1 document.write();
+    *
+    *           该方法的作用是： 把内容写到body里面
+    *           是无法修改内容的容器的，只能作为body的内容
+    *
+    *           而且如果是之后通过代码创建的元素，会把之前在body中的所有内容都覆盖
+    *
+    *           --一般是不会使用这个方式创建元素的
+    *
+    *      2 innerHTML
+    *
+    *           元素.innerHTML = '标签格式的字符串';
+    *
+    *           相比document.write，可以指定一个父元素了
+    *           但是还是把之前的内容覆盖了
+    *
+    *
+    *      3 document.createElement
+    *
+    *           用法： document.createElement('标签名');
+    *
+    *           但是创建的元素是不会自动添加到结构中的
+    *           创建出来的元素是存在于内存中，需要我们手动的添加到结构中
+    *           优点在于：不会覆盖
+    *
+    *           添加元素到结构中的方法
+    *
+    *               父元素.appendChild(子元素);
+    *
+    * */
+
+    //获取元素
+    var btn = document.getElementById("btn");
+    var father = document.getElementById("father");
+    //注册事件
+//    btn.onclick = function(){
+    // 这是演示document.write()
+//        document.write('<ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>');
+//    }
+
+//    btn.onclick = function(){
+    // 演示innerHTML
+//        father.innerHTML = '<ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
+//    }
+
+
+    btn.onclick = function(){
+        // 使用document.createElement的方式动态的创建列表
+        // 分析得出： 第一步：创建ul，第二步：循环的创建li
+        // 1 创建ul
+        var ul = document.createElement('ul');
+        // 1.2 记得把ul添加到结构中
+        father.appendChild(ul);
+        //2 循环的创建li
+        for(var i = 0; i < 6 ; i++){
+            var li = document.createElement('li');
+            // 2.2 记得添加到父元素内部
+            ul.appendChild(li);
+            // 2.3 给每个li添加内容
+            li.innerHTML = (i+1);
+            // 2.4 如果希望每个li的颜色是红色
+//            li.className = 'red';
+            li.style.backgroundColor = 'red';
+        }
+
+    }
+
+
+
+
+    //-------------------------------------------
+    /*
+    *  知识点的代码演示
+    * */
+//    document.write('<div>我叫李狗蛋，来为美丽的大理</div>')
+
+//    document.write('<ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>');
+
+
+    // innerHTML
+
+//    var father = document.getElementById("father");
+//    console.log(father.innerHTML);
+//    father.innerHTML = '<div>我叫李狗蛋，来为美丽的大理</div>';
+//    father.innerHTML = '<ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
+
+
+    // document.createElement
+
+//    var div = document.createElement('div');
+//    var p = document.createElement('p');
+//    var ul = document.createElement('ul');
+//    console.log(div);
+//    console.log(p);
+//    console.log(ul);
+//
+//    var father = document.getElementById("father");
+////    console.log(father);
+//    father.appendChild(div);
+//    father.appendChild(p);
+//    father.appendChild(ul);
+</script>
+</body>
+</html>

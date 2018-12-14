@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .abc {
+            width: 200px;
+            height: 100px;
+            background-color: #0a0;
+        }
+
+        .aa {
+            width: 100px;
+            height: 200px;
+            background-color: #f00;
+        }
+
+    </style>
+</head>
+<body>
+<input type="button" value="点击" id="btn"/>
+<div id="box" class="abc" title="这是我逝去的青春"></div>
+<script>
+
+    // 点击按钮的时候，修改div的title属性
+    // 1 获取元素对象
+    var btn = document.getElementById("btn");
+    var box = document.getElementById("box");
+    // 2 注册点击事件
+//    btn.onclick = function(){
+//        // 3 修改title属性
+//        box.title = "123456678";
+//    }
+
+
+    // 点击按钮，修改div的class属性
+    btn.onclick = function(){
+        //修改div的class属性
+        box.className = 'aa';
+    }
+
+
+</script>
+</body>
+</html>

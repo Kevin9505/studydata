@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        img {
+            width: 40px;
+        }
+        ul {
+            width: 400px;
+            margin: 10px auto;
+            list-style: none;
+        }
+        li {
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+        .red {
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+        
+    </style>
+</head>
+<body>
+<input type="button" value="点击" id="btn"/>
+<ul id="father">
+    <li class="red">
+        <a href="#">
+            <img src="images/b2.jpg" alt=""/>
+        </a>
+    </li>
+    <li class="green">
+        <a href="#">
+            <img src="images/b3.jpg" alt=""/>
+        </a>
+    </li>
+    <li class="red">
+        <a href="#">
+            <img src="images/b4.jpg" alt=""/>
+        </a>
+    </li>
+    <li class="green">
+        <a href="#">
+            <img src="images/b1.jpg" alt=""/>
+        </a>
+    </li>
+
+</ul>
+<script>
+
+    /*
+    *   点击按钮的时候生产多个li，并让鼠标在移入li的时候可以当前高亮
+    *
+    *   动态创建元素有常用的2种方式
+    *
+    *       innerHTML
+    *
+    *           一般来说，结构越复杂，innerHTML就越容易完成
+    *
+    *           但是有一个缺点：
+    *               覆盖
+    *
+    * */
+
+    // 获取元素
+    var btn= document.getElementById("btn");
+    var father= document.getElementById("father");
+    var lis = father.getElementsByTagName('li');
+    // 注册事件
+    btn.onclick = function(){
+        // 生成多个li，追加到ul这里面
+//        var html = '<li class="red">' +
+//                        '<a href="#">' +
+//                            '<img src="images/b4.jpg" alt=""/>' +
+//                        '</a>' +
+//                '</li>' +
+//                '<li class="green"><a href="#"><img src="images/b4.jpg" alt=""/></a></li>' +
+//                '<li class="red"><a href="#"><img src="images/b4.jpg" alt=""/></a></li>' +
+//                '<li class="green"><a href="#"><img src="images/b4.jpg" alt=""/></a></li>';
+
+        var arr = [];
+
+        for(var i = 0; i < 4 ; i++){
+            arr.push('<li class="red">');
+            arr.push('<a href="#">');
+            arr.push('<img src="images/b4.jpg" alt=""/>');
+            arr.push('</a>');
+            arr.push('</li>');
+        }
+
+        // 官方的js文档告诉我们  数组的join方法连接字符串比直接+效率要高
+        var html = arr.join("");
+        console.log(html);
+        // 设置给ul作为其内容
+        father.innerHTML = html;
+
+        // 重新给动态创建的元素注册事件
+        // 重新获取新建的元素
+        var lis2 = father.getElementsByTagName('li');
+        console.log(lis2);
+        // 注册
+        for(var i = 0; i < lis2.length ; i++){
+            lis2[i].onmouseover = mouseOverHandle;
+            lis2[i].onmouseout = mouseOutHandle;
+        }
+    }
+//    console.log(lis);
+    //给所有的li注册事件
+    for(var i = 0; i < lis.length ; i++){
+        lis[i].onmouseover = mouseOverHandle;
+        lis[i].onmouseout =mouseOutHandle;
+    }
+
+    function mouseOverHandle(){
+        // 设置行内样式即可
+        this.style.backgroundColor = 'yellow';
+    }
+
+    function mouseOutHandle(){
+        // 设置恢复原状
+        this.style.backgroundColor = '';
+    }
+
+
+</script>
+<li>
+    <a href="">
+        <img src="" alt=""/>
+    </a>
+</li>
+</body>
+</html>

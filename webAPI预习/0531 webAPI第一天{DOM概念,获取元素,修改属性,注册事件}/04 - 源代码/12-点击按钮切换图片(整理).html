@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        div.main {
+            width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main">
+
+    <div class="first">
+        <input type="button" value="美女1" id="btn1"/>
+        <input type="button" value="美女2"  id="btn2"/>
+        <input type="button" value="美女3" id="btn3"/>
+        <input type="button" value="美女4"  id="btn4"/>
+        <input type="button" value="美女5"  id="btn5"/>
+    </div>
+    <div class="second">
+        <img src="images/01.jpg" alt="" id="img"/>
+    </div>
+
+</div>
+<script>
+
+    /*
+    *  知识点看11页面，这里仅仅是把思路再次梳理
+    *
+    * */
+
+    // 获取元素
+    var inputs = document.getElementsByTagName("input");
+    var img = document.getElementById("img");
+    // 循环的注册事件
+    for(var i = 0; i < inputs.length; i++){
+        // 因为在函数里面得不到想要的索引，就在之前先给每个对象身上存储一个对应的索引
+        inputs[i].index = i;
+        inputs[i].onclick = function(){
+            //通过this得到对应的点击的按钮对象，此时按钮对象身上有index属性就是对应的索引
+            // 要索引的目的是根据索引拼出 按钮对应的图片的路径
+            var src = "images/0"+(this.index + 1)+".jpg";
+            // 把图片的路径修改
+            img.src = src;
+        }
+    }
+
+</script>
+</body>
+</html>

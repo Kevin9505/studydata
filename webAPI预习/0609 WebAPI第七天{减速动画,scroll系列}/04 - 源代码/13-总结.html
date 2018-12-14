@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    /*
+    *  减速动画完成
+    *
+    *       体会的是软件开发的辛酸
+    *           (不断的根据需求，完善功能的过程)
+    *
+    *       体会封装函数的过程(抽象的思维)
+    *           1 写过程
+    *           2 抽象(把可变的写成参数,把不可变的写成函数体,考虑有无返回值)
+    *
+    *       培养编程思维
+    *           for-in
+    *           反证法
+    *           回调函数
+    *
+    *  clientX/clientY
+    *
+    *       可视区域坐标
+    *           可视区域：容器用来展示内容的区域
+    *
+    *  pageX/pageY
+    *
+    *       页面坐标
+    *           整个页面的左上角为原点
+    *
+    *       兼容：
+    *           思路：
+    *               1 如果有替代方案，就判断兼容性，使用替代方案完成
+    *                   例如：注册事件/阻止冒泡/
+    *               2 如果没有替代方案，就自己模拟获取的过程
+    *                   获取pageX和pagY
+    *                       pageY = clientY + 页面滚动出去的距离
+    *
+    *
+    *                   找页面的容器
+    *                       window是页面的容器兼容最好的
+    *
+    *                       找滚动出去的距离的时候
+    *                           ie8里面支持：
+    *                               document.documentElement.scrollTop/scrollLeft
+    *                           非ie
+    *                               window.pageXOffset/pageYOffset
+    *
+    *                  封装了兼容获取pageX和pagY
+    *
+    *                       使用对象把代码保护起来的思想
+    *
+    *
+    *
+    *  滚动
+    *       scroll系列
+    *           元素内部的滚动
+    *               scrollTop
+    *               scrollLeft
+    *                   内容滚动出去的距离
+    *                   由容器对象来点出这个属性
+    *
+    *           事件：
+    *               scroll事件
+    *                   在滚动条滚动的时候触发
+    *
+    *           补充两个跟滚动有关联的属性
+    *               scrollWidth
+    *               scrollHeight
+    *                   自身的可视区域的宽高或者内容的宽高，谁大就是谁
+    *
+    *
+    * */
+
+</script>
+</body>
+</html>

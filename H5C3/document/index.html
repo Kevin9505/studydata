@@ -1,0 +1,917 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:index</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<hr>
+<p>学习目标:</p>
+<ul>
+<li>能够说出fullpage插件的使用基本思路</li>
+<li>能写出购物案例屏幕滚动效果及其侧边栏制作</li>
+<li>能写出第一屏布局及其动画效果</li>
+<li>能写出第二屏布局及其动画效果</li>
+<li>能写出第三屏布局及其动画效果</li>
+<li>能写出第四、五、六、七屏布局及其动画效果</li>
+<li>能写出第八屏布局及其动画效果</li>
+<li><p>能写出添加键盘滚动以及重新开始播放动画</p>
+<p>typora-copy-images-to: media</p>
+</li>
+</ul>
+<h2 id="-">---</h2>
+<h1 id="-">购物网站宣传页面</h1>
+<p><img src="media/demo.png" /></p>
+<p>案例目的：</p>
+<ol>
+<li>复习---复习前面学过的HTML5+CSS3</li>
+<li>综合---综合运用jquery完成案例</li>
+<li>拓展---可以做宣传页面或者个人简历</li>
+</ol>
+<h2 id="fullpage-">fullpage 全屏插件</h2>
+<p>全屏滚动效果，原生js也很好实现，主要是用 mousewheel  鼠标滚轮滚动事件， 来判断上滚动还是下滚动，之后设置每次滚动的高度为屏幕的高度即可。但是，虽然效果简单，但是兼容性很差，要做很多兼容处理及比较麻烦啦！（了解一下，有兴趣的同学可以研究一下）</p>
+<p>fullPage.js 是一个基于 jQuery 的插件，它能够帮你很方便、很轻松的制作出全屏网站。</p>
+<p>github 官网     <a href="https://github.com/alvarotrigo/fullPage.js">https://github.com/alvarotrigo/fullPage.js</a>  </p>
+<p>中文演示地址   <a href="http://www.dowebok.com/demo/2014/77/">http://www.dowebok.com/demo/2014/77/</a>    </p>
+<p>主要功能有：</p>
+<p>支持鼠标滚动</p>
+<p>支持前进后退和键盘控制</p>
+<p>多个回调函数</p>
+<p>支持手机、平板触摸事件</p>
+<p>支持 CSS3 动画</p>
+<p>支持窗口缩放</p>
+<p>窗口缩放时自动调整</p>
+<p>可设置滚动宽度、背景颜色、滚动速度、循环选项、回调、文本对齐方式等等</p>
+<h2 id="-">引用文件</h2>
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/jquery.fullPage.css&quot;&gt;
+&lt;script src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;
+ &lt;!-- jquery.easings.min.js 是必须的，用于 easing 参数，也可以使用完整的 jQuery UI 代替 --&gt;
+&lt;script src=&quot;js/jquery.easings.min.js&quot;&gt;&lt;/script&gt;
+ &lt;script src=&quot;js/jquery.fullPage.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="html-">HTML 结构</h2>
+<pre><code class="lang-HTML">&lt;div id=&quot;fullpage&quot;&gt;
+    &lt;div class=&quot;section&quot;&gt;第一屏&lt;/div&gt;
+    &lt;div class=&quot;section&quot;&gt;第二屏&lt;/div&gt;
+    &lt;div class=&quot;section&quot;&gt;
+        &lt;div class=&quot;slide&quot;&gt;第三屏的第一屏&lt;/div&gt;
+        &lt;div class=&quot;slide&quot;&gt;第三屏的第二屏&lt;/div&gt;
+        &lt;div class=&quot;slide&quot;&gt;第三屏的第三屏&lt;/div&gt;
+        &lt;div class=&quot;slide&quot;&gt;第三屏的第四屏&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;section&quot;&gt;第四屏&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><img src="media/full.png" /></p>
+<h2 id="javascript-">JavaScript入口函数</h2>
+<pre><code class="lang-javascript">$(function(){
+    $(&#39;#fullpage&#39;).fullpage();
+});
+</code></pre>
+<h2 id="fullpage-">fullpage 详细参数</h2>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>类型</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>verticalCentered</td>
+<td>字符串</td>
+<td>true</td>
+<td>内容是否垂直居中</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>布尔值</td>
+<td>false</td>
+<td>字体是否随着窗口缩放而缩放</td>
+</tr>
+<tr>
+<td>sectionColor</td>
+<td>函数</td>
+<td>无</td>
+<td>设置背景颜色</td>
+</tr>
+<tr>
+<td>anchors</td>
+<td>数组</td>
+<td>无</td>
+<td>定义锚链接</td>
+</tr>
+<tr>
+<td>scrollingSpeed</td>
+<td>整数</td>
+<td>700</td>
+<td>滚动速度，单位为毫秒</td>
+</tr>
+<tr>
+<td>easing</td>
+<td>字符串</td>
+<td>easeInQuart</td>
+<td>滚动动画方式</td>
+</tr>
+<tr>
+<td>menu</td>
+<td>布尔值</td>
+<td>false</td>
+<td>绑定菜单，设定的相关属性与 anchors 的值对应后，菜单可以控制滚动</td>
+</tr>
+<tr>
+<td>navigation</td>
+<td>布尔值</td>
+<td>false</td>
+<td>是否显示项目导航</td>
+</tr>
+<tr>
+<td>navigationPosition</td>
+<td>字符串</td>
+<td>right</td>
+<td>项目导航的位置，可选 left 或 right</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>navigationTooltips</td>
+<td>数组</td>
+<td>空</td>
+<td>项目导航的 tip</td>
+</tr>
+<tr>
+<td>slidesNavigation</td>
+<td>布尔值</td>
+<td>false</td>
+<td>是否显示左右滑块的项目导航</td>
+</tr>
+<tr>
+<td>slidesNavPosition</td>
+<td>字符串</td>
+<td>bottom</td>
+<td>左右滑块的项目导航的位置，可选 top 或 bottom</td>
+</tr>
+<tr>
+<td>controlArrowColor</td>
+<td>字符串</td>
+<td>#fff</td>
+<td>左右滑块的箭头的背景颜色</td>
+</tr>
+<tr>
+<td>loopBottom</td>
+<td>布尔值</td>
+<td>false</td>
+<td>滚动到最底部后是否滚回顶部</td>
+</tr>
+<tr>
+<td>loopTop</td>
+<td>布尔值</td>
+<td>false</td>
+<td>滚动到最顶部后是否滚底部</td>
+</tr>
+<tr>
+<td>loopHorizontal</td>
+<td>布尔值</td>
+<td>true</td>
+<td>左右滑块是否循环滑动</td>
+</tr>
+<tr>
+<td>autoScrolling</td>
+<td>布尔值</td>
+<td>true</td>
+<td>是否使用插件的滚动方式，如果选择 false，则会出现浏览器自带的滚动条</td>
+</tr>
+<tr>
+<td>scrollOverflow</td>
+<td>布尔值</td>
+<td>false</td>
+<td>内容超过满屏后是否显示滚动条</td>
+</tr>
+<tr>
+<td>css3</td>
+<td>布尔值</td>
+<td>false</td>
+<td>是否使用 CSS3 transforms 滚动</td>
+</tr>
+<tr>
+<td>paddingTop</td>
+<td>字符串</td>
+<td>0</td>
+<td>与顶部的距离</td>
+</tr>
+<tr>
+<td>paddingBottom</td>
+<td>字符串</td>
+<td>0</td>
+<td>与底部距离</td>
+</tr>
+<tr>
+<td>fixedElements</td>
+<td>字符串</td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>normalScrollElements</td>
+<td></td>
+<td>无</td>
+<td></td>
+</tr>
+<tr>
+<td>keyboardScrolling</td>
+<td>布尔值</td>
+<td>true</td>
+<td>是否使用键盘方向键导航</td>
+</tr>
+<tr>
+<td>touchSensitivity</td>
+<td>整数</td>
+<td>5</td>
+<td></td>
+</tr>
+<tr>
+<td>continuousVertical</td>
+<td>布尔值</td>
+<td>false</td>
+<td>是否循环滚动，与 loopTop 及 loopBottom 不兼容</td>
+</tr>
+<tr>
+<td>animateAnchor</td>
+<td>布尔值</td>
+<td>true</td>
+<td></td>
+</tr>
+<tr>
+<td>normalScrollElementTouchThreshold</td>
+<td>整数</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fullpage-js-">fullPage.js 方法</h3>
+<p>注意方法的使用时需要添加：</p>
+<p>$.fn.fullpage   比如</p>
+<pre><code class="lang-javascript">$.fn.fullpage.moveTo(1);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>moveSectionUp()</td>
+<td>向上滚动</td>
+</tr>
+<tr>
+<td>moveSectionDown()</td>
+<td>向下滚动</td>
+</tr>
+<tr>
+<td>moveTo(section, slide)</td>
+<td>滚动到</td>
+</tr>
+<tr>
+<td>moveSlideRight()</td>
+<td>slide 向右滚动</td>
+</tr>
+<tr>
+<td>moveSlideLeft()</td>
+<td>slide 向左滚动</td>
+</tr>
+<tr>
+<td>setAutoScrolling()</td>
+<td>设置页面滚动方式，设置为 true 时自动滚动</td>
+</tr>
+<tr>
+<td>setAllowScrolling()</td>
+<td>添加或删除鼠标滚轮/触控板控制</td>
+</tr>
+<tr>
+<td>setKeyboardScrolling()</td>
+<td>添加或删除键盘方向键控制</td>
+</tr>
+<tr>
+<td>setScrollingSpeed()</td>
+<td>定义以毫秒为单位的滚动速度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-">回调函数</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>afterLoad</td>
+<td>滚动到某一屏后的回调函数，接收 anchorLink 和 index 两个参数，anchorLink 是锚链接的名称，index 是序号，从1开始计算</td>
+</tr>
+<tr>
+<td>onLeave</td>
+<td>滚动前的回调函数，接收 index、nextIndex 和 direction 3个参数：index 是离开的“页面”的序号，从1开始计算；nextIndex 是滚动到的“页面”的序号，从1开始计算；direction 判断往上滚动还是往下滚动，值是 up 或 down。</td>
+</tr>
+<tr>
+<td>afterRender</td>
+<td>页面结构生成后的回调函数，或者说页面初始化完成后的回调函数</td>
+</tr>
+<tr>
+<td>afterSlideLoad</td>
+<td>滚动到某一水平滑块后的回调函数，与 afterLoad 类似，接收 anchorLink、index、slideIndex、direction 4个参数</td>
+</tr>
+<tr>
+<td>onSlideLeave</td>
+<td>某一水平滑块滚动前的回调函数，与 onLeave 类似，接收 anchorLink、index、slideIndex、direction 4个参数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jquery-easing-js-">jQuery Easing.js 插件</h2>
+<p>介绍：easing是jquery的一个插件，使用它可以创建更加绚丽的动画效果。</p>
+<p>环境：因为easing是jQuery的插件，所以必须是在引入jquery之后再引入它</p>
+<p>如果只想要简单的写法就用 </p>
+<pre><code class="lang-javascript">$(&quot;.car&quot;).animate({&quot;left&quot;: &quot;150%&quot;},  4000, &quot;easeInElastic&quot;, function() {});
+</code></pre>
+<pre><code class="lang-javascript">easing:格式为json,{duration:持续时间,easing:过渡效果,complete:成功后的回调函数}
+</code></pre>
+<pre><code class="lang-javascript">$(element).animate({ 
+    height:500, 
+    width:600 
+    },{ 
+    easing: &#39;easeInOutQuad&#39;, 
+    duration: 500, 
+    complete: function(){} 
+});
+</code></pre>
+<ol>
+<li>linear</li>
+<li>swing</li>
+<li>easeInQuad</li>
+<li>easeOutQuad</li>
+<li>easeInOutQuad</li>
+<li>easeInCubic</li>
+<li>easeOutCubic</li>
+<li>easeInOutCubic</li>
+<li>easeInQuart</li>
+<li>easeOutQuart</li>
+<li>easeInOutQuart</li>
+<li>easeInQuint</li>
+<li>easeOutQuint</li>
+<li>easeInOutQuint</li>
+<li>easeInExpo</li>
+<li>easeOutExpo</li>
+<li>easeInOutExpo</li>
+<li>easeInSine</li>
+<li>easeOutSine</li>
+<li>easeInOutSine</li>
+<li>easeInCirc</li>
+<li>easeOutCirc</li>
+<li>easeInOutCirc</li>
+<li>easeInElastic</li>
+<li>easeOutElastic</li>
+<li>easeInOutElastic</li>
+<li>easeInBack</li>
+<li>easeOutBack</li>
+<li>easeInOutBack</li>
+<li>easeInBounce</li>
+<li>easeOutBounce</li>
+<li>easeInOutBounce</li>
+</ol>
+<p><img src="media/esse.png"/></p>
+<p><a href="https://matthewlein.com/experiments/easing.html">https://matthewlein.com/experiments/easing.html</a></p>
+<h2 id="-">动画复习</h2>
+<h1 id="-">兼容处理（理解）</h1>
+<ol>
+<li><p>在不支持HTML5新标签的浏览器里，会将这些新的标签解析成行内元素(inline)对待，所以我们只需要将其转换成块元素(block)即可使用，但是在IE9版本以下，并不能正常解析这些新标签，但是却可以识别通过document.createElement(&#39;tagName&#39;)创建的自定义标签，于是我们的解决方案就是将HTML5的新标签全部通过document.createElement(&#39;tagName&#39;)来创建一遍，这样IE低版本也能正常解析HTML5新标签了。</p>
+</li>
+<li><p>处理方式：在实际开发中我们更多采用的是通过检测IE浏览器的版本来加载三方的一个JS库来解决兼容问题（测试在IE下面的兼容性：ieTester软件的使用）</p>
+<script src="../js/html5shiv.min.js"></script>
+
+
+
+</li>
+</ol>
+<p> 我们解决的问题， 主要是针对于ie低版本的，也就是只有低版本ie才执行才对。</p>
+<pre><code class="lang-html">&lt;!--[if lt IE 9]&gt;
+
+　　 &lt;script src=&quot;js/respond.js&quot;&gt;&lt;/script&gt;
+
+ 　　&lt;script src=&quot;js/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;![endif]—&gt;
+</code></pre>
+<p>respond.js  目的是为了解决 ie低版本的CSS3媒体查询  media query</p>
+<p>条件注释 了解</p>
+<pre><code class="lang-html">&lt;!--[if !IE]&gt;&lt;!--&gt; 除IE外都可识别 &lt;!--&lt;![endif]--&gt;
+&lt;!--[if IE]&gt; 所有的IE可识别 &lt;![endif]--&gt;
+&lt;!--[if IE 6]&gt; 仅IE6可识别 &lt;![endif]--&gt;
+&lt;!--[if lte IE 6]&gt; IE6以及IE6以下版本可识别 &lt;![endif]--&gt;
+&lt;!--[if gte IE 6]&gt; IE6以及IE6以上版本可识别 &lt;![endif]--&gt;
+&lt;!--[if IE 7]&gt; 仅IE7可识别 &lt;![endif]--&gt;
+&lt;!--[if lt IE 7]&gt; IE7以下版本可识别 &lt;![endif]--&gt;
+&lt;!--[if gt IE 7]&gt; IE7以上版本可识别 &lt;![endif]--&gt;
+&lt;!--[if IE 8]&gt; 仅IE8可识别 &lt;![endif]--&gt;
+&lt;!--[if IE 9]&gt; 仅IE9可识别 &lt;![endif]--&gt;
+</code></pre>
+<p><img src="media/html.jpg" /></p>
+<h1 id="360-3d-">360度3D 旋转插件</h1>
+<p>使用方法：</p>
+<ol>
+<li><p>引用js文件包</p>
+<pre><code class="lang-html">&lt;script src=&quot;js/jquery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;js/circlr.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>2.书写结构：</p>
+</li>
+</ol>
+<pre><code class="lang-html">&lt;div class=&quot;container&quot;&gt;
+        &lt;div id=&quot;circlr&quot;&gt;
+             &lt;img data-src=&quot;picture/1.png&quot; /&gt;
+             &lt;img data-src=&quot;picture/2.png&quot; /&gt; 
+             &lt;img data-src=&quot;picture/3.png&quot; /&gt;  
+             ...
+            &lt;div id=&quot;loader&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+ &lt;/div&gt;
+</code></pre>
+<p>注意， 是 自定义属性  data-src 里面写路径    2.  loader 是 加载项  </p>
+<ol>
+<li><p>书写css</p>
+<pre><code class="lang-css">#circlr {
+  cursor: move;
+  margin: 0 auto;
+  min-height: 100px;
+  position: relative;
+}
+#circlr #loader {
+  background: url(../images/loader.gif) center center no-repeat;
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+</code></pre>
+<p>​</p>
+</li>
+</ol>
+<p>4.调用文件对象</p>
+<pre><code class="lang-javascript">&lt;script type=&quot;text/javascript&quot;&gt;
+    var crl = circlr(&#39;circlr&#39;, {
+      scroll : true,
+      loader : &#39;loader&#39;
+    });
+&lt;/script&gt;
+</code></pre>
+<p>5.API</p>
+<pre><code>参数
+mouse：是否通过鼠标进行图片旋转，默认值为true。
+
+scroll：是否通过scroll进行图片旋转，默认值为false。
+
+vertical：是否在垂直方向上移动鼠标时旋转图片，默认值为false。
+
+reverse：是否反转方向，默认值为false。
+
+cycle：是否循环旋转图片，默认值为true。
+
+start：开始动画帧，默认值为0。
+
+speed：动画帧通过circlr.turn(i)切换的速度，默认值为50毫秒。
+
+autoplay：是否自动进行图片360度旋转播放，默认值为false。
+
+playSpeed：动画序列的播放速度，默认值为100毫秒。
+
+loader：预加载DOM元素的ID。
+
+ready：图片加载完成后的回调函数。
+
+change：动画帧改编之后的回调函数（以当前帧和总帧数为参数）。
+
+方法
+
+crl.el：返回对象的DOM元素节点。
+
+crl.length：返回对象的总的动画帧数。
+
+crl.turn(i)：动画旋转到第i帧。
+
+crl.go(i)：动画跳转到第i帧。
+
+crl.play()：开始动画序列的播放。
+
+crl.stop()：停止动画播放。
+
+crl.hide()：隐藏对象的DOM元素节点。
+
+crl.show()：显示对象的DOM元素节点。
+
+crl.set(options)：在插件初始化之后改变对象的参数：
+
+    vertical
+
+    reverse
+
+    cycle
+
+    speed
+
+    playSpeed
+</code></pre><p><img src="media/car.png" /></p>
+<h1 id="-">视差滚动插件</h1>
+<p>视差滚动（Parallax Scrolling）指网页滚动过程中，多层次的元素进行不同程度的移动，视觉上形成立体运动效果的网页展示技术</p>
+<p>主要核心就是前景和背景以不同的速度移动，从而创造出3D效果。 这种效果可以给网站一个很好的补充。</p>
+<h2 id="-">特性</h2>
+<p>视差滚动效果酷炫，适合于个性展示的场合。</p>
+<p>视差滚动徐徐展开，适合于娓娓道来，讲故事的场合。</p>
+<p>视差滚动容易迷航，需要具备较强的导航功能。</p>
+<h2 id="-">原理</h2>
+<p>传统的网页的文字、图片、背景都是一起按照相同方向相同速度滚动的，而视差滚动则是在滚动的时候，内容和多层次的背景实现或不同速度，或不同方向的运动。</p>
+<p>有的时候也可以加上一些透明度、大小的动画来优化显示。 </p>
+<p>利用background-attachment属性实现。</p>
+<p><strong>background-attachment: fixed || scroll || local</strong></p>
+<h2 id="stellar-js-">Stellar.js是什么？</h2>
+<p>[stellar.js]是一个 jQuery插件，能很容易地给网站添加视差滚动效果。 尽管已经停止了维护，但它非常稳定，与最新版本的jQuery兼容，很多开发者也在使用它。 这个插件在jQuery插件库里很流行。</p>
+<p><a href="http://markdalgleish.com/projects/stellar.js/">http://markdalgleish.com/projects/stellar.js/</a>   官网</p>
+<h3 id="-js-">引用 js包</h3>
+<pre><code class="lang-javascript">&lt;script src=&quot;path/to/jquery/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/jquery.stellar.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h3 id="-html">引用html</h3>
+<pre><code class="lang-html">&lt;div class=&quot;content&quot; id=&quot;content1&quot;&gt;
+    &lt;p&gt;TEXT HERE&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot; id=&quot;content2&quot;&gt;
+    &lt;p&gt;TEXT HERE&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot; id=&quot;content3&quot; data-stellar-background-ratio=&quot;0.5&quot;&gt;
+    &lt;p&gt;TEXT HERE&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot; id=&quot;content4&quot; data-stellar-background-ratio=&quot;0.5&quot;&gt;
+    &lt;p&gt;TEXT HERE&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot; id=&quot;content5&quot; data-stellar-background-ratio=&quot;0.5&quot;&gt;
+    &lt;p&gt;TEXT HERE&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot; id=&quot;content6&quot; data-stellar-background-ratio=&quot;0.5&quot;&gt;
+    &lt;p&gt;TEXT HERE&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="-css">引入CSS</h3>
+<pre><code class="lang-CSS">body {
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 1px 0 black, 0 0 5px black;
+}
+p {
+    padding: 0 0.5em;
+    margin: 0;
+}
+.content {
+    background-attachment: fixed;
+    height: 400px;
+}
+#content1 {
+    background-image: url(&quot;xxx.jpg&quot;);
+}
+#content2 {
+    background-image: url(&quot;xxx.jpg&quot;);
+}
+#content3 {
+    background-image: url(&quot;xxx.jpg&quot;);
+}
+#content4 {
+   background-image: url(&quot;xxx.jpg&quot;);
+}
+#content5 {
+   background-image: url(&quot;xxx.jpg&quot;);&quot;);
+}
+#content6 {
+    background-image: url(&quot;xxx.jpg&quot;);
+}
+</code></pre>
+<h3 id="js-">js调用函数</h3>
+<pre><code class="lang-javascript">$.stellar({
+    horizontalScrolling: false,
+    responsive: true
+});
+</code></pre>
+<h3 id="-">详细参数</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>horizontalScrolling 和 verticalScrolling</td>
+<td>该配置项用来设置视差效果的方向。horizontalScrolling设置水平方向，verticalScro设置垂直方向， 为布尔值，默认为true</td>
+</tr>
+<tr>
+<td>responsive</td>
+<td>该配置项用来制定load或者resize时间触发时是否刷新页面，其值为布尔值，默认为false</td>
+</tr>
+<tr>
+<td>hideDistantElements</td>
+<td>该配置项用来设置移出视线的元素是否隐藏，其值为布尔值，若不想隐藏则设置为false`</td>
+</tr>
+<tr>
+<td>data-stellar-ratio=&quot;2&quot;</td>
+<td>定义了此元素针对页面滚动的速度比率，比如，0.5为页面滚动的50%，2为页面滚动的200%，所以数值越大，你可以看到页面元素滚动速度越快。</td>
+</tr>
+<tr>
+<td>data-stellar-background-ratio</td>
+<td>该配置项用在单个元素中，其值为一个正数，用来改变被设置元素的影响速度。 例如 值为0.3时，则表示背景的滚动速度为正常滚动速度的0.3倍。如果值为小数时最好在样式表中设置</td>
+</tr>
+</tbody>
+</table>
+<h1 id="qq-tim-">QQ TIM 案例</h1>
+<p><img src="media/shicha.png" /></p>
+<h2 id="-gradient">渐变-gradient</h2>
+<ul>
+<li>线性渐变 linear-gradient<ul>
+<li>参数（方向,颜色 开始位置,颜色 结束位置）<ul>
+<li>方向 (to top|bottom|left|right) | (to top right)|(45deg)</li>
+<li>颜色 red</li>
+<li>开始位置 10%|100px</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>径向渐变 radial-gradient<ul>
+<li>参数（形状|半径大小|圆心位置,颜色 开始位置,颜色 结束位置）<ul>
+<li>形状 circle（正圆）|ellpise（椭圆） 如果省略，目标元素是正方形-正圆，目标元素是长方形-椭圆</li>
+<li>半径大小 (farthest-side(最远边)|farthest-corner(最近边)|farthest-corner(最远角)|closest-side(最近边)) | （自定义大小 （椭圆有两条半径） 如 45px,40px）</li>
+<li>圆心位置 （at top left center）|自定义位置（at 22px 50px）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">新标签</h2>
+<ul>
+<li>range 标签 </li>
+<li>oninput 事件 <h2 id="dom-">dom增强</h2>
+</li>
+<li>document.querySelector()-单个元素</li>
+<li>document.querySelectorAll()-数组</li>
+<li>四种操作class的方法<ul>
+<li>add</li>
+<li>remove</li>
+<li>contains</li>
+<li>toggle</li>
+<li>h5自定义属性 data-*</li>
+<li>dataset对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">多媒体标签</h2>
+<ul>
+<li>audio<ul>
+<li>支持格式<ul>
+<li><img src="./media/16.png" alt=""></li>
+</ul>
+</li>
+<li>属性<ul>
+<li><img src="./media/6.png" alt=""></li>
+<li><img src="./media/7.png" alt=""></li>
+</ul>
+</li>
+<li>方法<ul>
+<li><img src="./media/8.png" alt=""></li>
+</ul>
+</li>
+<li>事件<ul>
+<li><img src="./media/9.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>video<ul>
+<li>oncanplay 事件 加载完毕</li>
+<li>ontimeupdate 播放的每一秒都可以触发</li>
+<li>duration 视频的总时长</li>
+<li>currentTime 当前播放的进度</li>
+<li>volume 声音的大小</li>
+<li>支持格式<ul>
+<li><img src="./media/17.png" alt=""></li>
+</ul>
+</li>
+<li>属性<ul>
+<li><img src="./media/10.png" alt=""></li>
+<li><img src="./media/11.png" alt=""></li>
+</ul>
+</li>
+<li>方法<ul>
+<li><img src="./media/12.png" alt=""></li>
+</ul>
+</li>
+<li>事件<ul>
+<li><img src="./media/13.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">网络状态</h2>
+<ul>
+<li>navigator.online</li>
+<li>事件 online 连接上网的时候触发</li>
+<li>事件 offline 断开网络的时候触发</li>
+</ul>
+<h2 id="-">地理位置</h2>
+<ul>
+<li>navigator.geolocation.getCurrentPosition 接受三个参数 (获取成功的回调，失败的回调,配置参数) (success,error,{enableHighAccuracy(是否获取高精度):true,timeout(超时时间 ms),maximumAge(重新获取地理位置的时间 ms)})</li>
+<li>success(position)成功的回调<ul>
+<li>postion.coords.latitude 纬度</li>
+<li>postion.coords.longitude 经度</li>
+<li>postion.coords.accuracy 精度-精确到多少米</li>
+<li>postion.coords.altitude 海拔高度(支持程度不够)</li>
+</ul>
+</li>
+<li>error(err) 失败的回调<ul>
+<li>code 状态值<ul>
+<li>1 用户拒绝</li>
+<li>2 获取不到信息</li>
+<li>3 超时</li>
+</ul>
+</li>
+<li>message 提示信息</li>
+</ul>
+</li>
+<li>opctions(可选) 设置信息<ul>
+<li>enableHighAccuracy 是否要求高精度-默认true</li>
+<li>timeout 超时时间设置-毫秒</li>
+<li>maximumAge 地理位置信息缓存有效时间</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">全屏</h2>
+<ul>
+<li>谷歌 webkitRequestPullScreen</li>
+<li>火狐 mozRequestPullScreen</li>
+<li>ie msRequestPullscreen</li>
+</ul>
+<h2 id="file">file</h2>
+<ul>
+<li>新的file对象 new FileReader()</li>
+<li>fileReader.readAsText() 当作文本读取</li>
+<li>fileReader.readAsDataURL 读取文件的路径 图片、视频、音乐</li>
+<li>fileReader.readAsBinaryString 读取文件的二进制码</li>
+<li>fileReader.onload 读取文件结束后执行</li>
+<li>fileReader.result 在onload中 获取读取完的文件的结果</li>
+</ul>
+<h2 id="-">拖拽</h2>
+<ul>
+<li>被拖拽的元素<ul>
+<li>ondragstart 开始拖拽的时候</li>
+<li>ondrag 拖拽移动的时候</li>
+<li>ondragleave 拖拽的时候 离开自身的范围</li>
+<li>ondragend  拖拽松开手指的时候</li>
+</ul>
+</li>
+<li>舞台元素（用来安放被拖拽元素的盒子）<ul>
+<li>ondragenter 被拖拽的元素进入舞台的时候</li>
+<li>ondragover 被拖拽的元素在舞台上移动的时候<ul>
+<li>阻止浏览器默认事件 e.preventDefault</li>
+</ul>
+</li>
+<li>ondragleave 被拖拽的元素离开舞台上的时候</li>
+<li>ondrop 被拖拽的元素在舞台上松开手指的时候<ul>
+<li>e.dataTransfer.files 获取被拖拽的目标元素（图片-文件等）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">存储</h2>
+<ul>
+<li>sesstionStorage<ul>
+<li>大小约为5M</li>
+<li>存在于当前会话中</li>
+<li>点击超链接后还存在</li>
+<li>关闭当前页面,浏览器就不再存在</li>
+<li>页面权限验证</li>
+<li>方法<ul>
+<li>getItem</li>
+<li>setItem</li>
+<li>removeItem</li>
+<li>clear</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>localStorage<ul>
+<li>大小为20M</li>
+<li>关闭浏览器还存在</li>
+<li>每一次发送请求不会带上</li>
+<li>getItem</li>
+<li>setItem</li>
+<li>removeItem</li>
+<li>clear</li>
+</ul>
+</li>
+</ul>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

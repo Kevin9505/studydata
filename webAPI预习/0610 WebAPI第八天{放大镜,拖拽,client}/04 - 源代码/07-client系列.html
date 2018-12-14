@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .box {
+            width: 200px;
+            height: 220px;
+            border-top: 10px solid red;
+            border-left: 15px dashed green;
+            background-color: #00f;
+            padding: 10px;
+            /*overflow: scroll;*/
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+
+    /*
+    *  offset
+    *
+    *  scroll
+    *
+    *  client
+    *
+    *
+    *
+    *       client
+    *           客户端可视区域
+    *
+    *           clientTop
+    *           clientLeft
+    *               几乎没用：
+    *                   得到的是： 元素的顶部边框的宽度
+    *                               元素左边边框的宽度
+    *
+    *           clientWidth
+    *           clientHeight
+    *               元素可视区域的宽高 = padding + content
+    *                   可视区域：
+    *                       容器用来展示内容的区域
+    * */
+
+    var box = document.querySelector('.box');
+    console.log(box.clientTop);
+    console.log(box.clientLeft);
+    console.log(box.clientWidth);
+    console.log(box.clientHeight);
+
+</script>
+</body>
+</html>

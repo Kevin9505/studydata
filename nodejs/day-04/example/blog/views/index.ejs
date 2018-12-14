@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head> 
+    <title>首页</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <% include header %>
+
+    <ul>
+    <% posts.forEach(post => { %>
+        
+        <li>
+            <div><%= post.title %></div>
+            <p><%= post.content %></p>
+            <p>Posted by <%= post.name %></p>
+        </li>
+
+    <% }) %>
+    </ul>
+</body>
+</html>

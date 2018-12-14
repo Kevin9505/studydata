@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        .main {
+            width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <input type="button" value="修改图片" id="btn"/>
+    <br/>
+    <img src="images/first.jpg" alt="那天夕阳下的奔跑" id="img" title="突然想起了"/>
+</div>
+<script>
+
+    /*
+    *  思路：
+    *       点击按钮的时候，修改图片的路径
+    *
+    *       如果希望用户在跟页面产生交互的时候能让页面也有反应
+    *
+    *       需要：  注册事件
+    *
+    *           事件：
+    *               一件事
+    *
+    *
+    *           注册事件的语法：
+    *
+    *               元素对象.on+事件名称 = 函数
+    *
+    *               就会在触发对应的事件的时候，执行这个函数
+    * */
+
+    /*
+    *  但凡是DOM里面的程序，都少不了这个套路：
+    *   1 找对象(元素)
+    *
+    *   2 注册事件
+    *
+    *   3 在注册事件的函数中实现对应效果的逻辑
+    * */
+
+    //1 获取元素对象
+    var btn = document.getElementById("btn");
+    var img = document.getElementById('img');
+    // 2 注册事件
+    // 语法格式： 元素.on+事件的名词 = 函数 --》在触发事件的时候，执行函数里面的代码
+    btn.onclick = function(){
+        //3 修改图片的路径
+//        console.log(img.src);
+        img.src = "images/second.jpg"
+    }
+
+</script>
+</body>
+</html>

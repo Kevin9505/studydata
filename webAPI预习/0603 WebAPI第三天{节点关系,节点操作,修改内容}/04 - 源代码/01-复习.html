@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        div {
+            width: 200px;height: 300px;background-color:#0a0;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="abc" title="这是一个非常寂寞的秋天" style="">
+    <ul>
+        <li class="def"></li>
+        <li class="def"></li>
+        <li class="def"></li>
+        <li class="def"></li>
+        <li class="def"></li>
+        <li class="def"></li>
+    </ul>
+</div>
+<script>
+
+    /*
+    *   className
+    *
+    *
+    *   style
+    *
+    *
+    * */
+    
+    var div = document.getElementById("abc");
+////    console.log(div.title);
+//
+//    console.log(div.style.backgroundColor);
+
+    var lis = div.querySelectorAll(".def");
+    console.log(lis);
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        #father {
+            width: 200px;
+            height: 60px;
+            background-color: #0a0;
+        }
+        img {
+            display: none;
+        }
+
+        /*#father:hover img {*/
+            /*display: block;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="father">
+
+</div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<img src="images/jdcode.png" alt="" id="img"/>
+<script>
+    /*
+    *  鼠标移入控制元素显示和隐藏
+    *       css
+    *           必须是前后代或者兄弟结构
+    *
+    *       js
+    *           对结构没有任何的要求都可以做
+    *
+    * */
+
+    /*
+    *  思路： 当鼠标移入father这个div的时候，找到img，控制他显示
+    *         当鼠标移出father，让img，隐藏
+    *
+    *
+    *    新事件：
+    *       鼠标移入的时候触发
+    *
+    *           mouseover
+    *               enter
+    *       鼠标移出的时候触发
+    *
+    *           mouseout
+    *               leave
+    * */
+
+    // 获取元素
+    var father = document.getElementById("father");
+    var img = document.getElementById("img");
+    // 完成效果
+    father.onmouseover = function(){
+        // 鼠标移入，让图片显示
+        img.style.display = "block";
+    }
+    father.onmouseout  =function(){
+        // 鼠标移出，要把图片隐藏
+        img.style.display = "none";
+    }
+
+
+    // 注册事件
+//    father.onmouseover = function(){
+//        console.log(123);
+//    }
+//    father.onmouseenter = function(){
+//        console.log(456);
+//    }
+    
+//    father.onmouseout = function(){
+//        console.log(123);
+//    }
+
+//    father.onmouseleave = function(){
+//        console.log(789);
+//    }
+
+</script>
+
+</body>
+</html>

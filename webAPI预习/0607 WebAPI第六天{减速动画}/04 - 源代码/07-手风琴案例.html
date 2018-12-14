@@ -1,0 +1,93 @@
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>做人要对自己狠一点</title>
+    <style>
+
+        ul {
+            list-style: none;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        div {
+            width: 1150px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        div li {
+            width: 240px;
+            height: 400px;
+            float: left;
+        }
+
+        div ul {
+            width: 1300px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="animate.js"></script>
+<script>
+
+    /*
+    *  需求：
+    *       动态生成背景图片
+    *
+    *       把鼠标移入某个图片，当前变大，其他变小
+    *
+    *       把鼠标移出，所有都恢复原来的大小
+    *
+    * */
+
+    // 获取元素
+    var lis = document.getElementById('box').getElementsByTagName('li');
+//    console.log(lis);
+    // 1 动态生成背景图片
+    for(var i = 0; i < lis.length ; i++){
+        lis[i].style.backgroundImage = 'url("images/'+(i+1)+'.jpg")'
+    }
+    // 2 完成鼠标移入移出的效果
+    for(var i = 0; i < lis.length ; i++){
+        // 注册鼠标的移入移出事件
+        lis[i].onmouseover =mouseOverHandle;
+        lis[i].onmouseout =mouseOutHandle;
+    }
+    function mouseOverHandle(){
+        // 把其他都变窄
+        for(var j = 0; j < lis.length ; j++){
+            animate_v2(lis[j],100,'width');
+        }
+        // 把自己变宽
+        animate_v2(this,800,'width');
+    }
+    function mouseOutHandle(){
+        // 把所有都恢复原状
+        for(var j = 0; j < lis.length ; j++){
+            animate_v2(lis[j],240,'width');
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        img {
+            position: absolute;
+        }
+        .box {
+            width: 200px;
+            height: 2000px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<img src="images/tianshi.gif" alt=""/>
+<script>
+
+    /*
+    *  在鼠标移动的时候，获取鼠标的位置，设置给图片
+    *   mousemove  鼠标移动的事件 -- 鼠标在某个对象身上移动的时候触发
+    *
+    *   clientX/clientY   浏览器的可是区域的坐标
+    *
+    *   pageX/pageY       页面坐标
+    *                           以整个页面的左上角为原点
+    *
+    *                     兼容：
+    *                       ie8不支持
+    *
+    *                     并且在ie8里面没有对一个的替代方案，没有替代方案，只能自己模拟
+    *
+    *                     发现：
+    *                       pageY = clientY + 一段距离()
+    *
+    * */
+    var img = document.getElementsByTagName('img')[0];
+    document.onmousemove = function(e){
+        // 获取鼠标的位置
+//        var x = e.clientX;
+//        var y = e.clientY;
+        // 在ie8中 ： 无法获取未定义或 null 引用的属性“pageX” 值的是点pageX的对象为null或者未定义
+        //  如果报这个错，说明对象的获取不对
+
+        // 兼容的获取事件对象
+        e = e || window.event;
+
+//        var x = e.clientX;
+//        var y = e.clientY;
+
+        var x = e.pageX;
+        var y = e.pageY;
+        console.log(x,y);
+        // 设置给图片
+        img.style.left = x + 'px';
+        img.style.top = y + 'px';
+    }
+
+</script>
+</body>
+</html>

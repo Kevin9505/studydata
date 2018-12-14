@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .yeye {
+            width: 400px;
+            height: 400px;
+            background-color: #00aa00;
+        }
+
+        .baba {
+            width: 300px;
+            height: 300px;
+            background-color: #f00;
+        }
+
+        .sunzi {
+            width: 200px;
+            height: 200px;
+            background-color: #00f;
+            position: absolute;
+            left: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="yeye">
+    <div class="baba">
+        <div class="sunzi"></div>
+    </div>
+</div>
+
+<script>
+
+    /*
+     *  有时候，事件的冒泡会带来问题：
+     *       有一个父子结构，两个元素都有各自的功能，都是有点击或者同一个事件触发的
+     *
+     *       如果触发了子元素的功能，就会冒泡，也会触发父元素的功能
+     *
+     *       不合理
+     *           解决方案： 阻止事件的冒泡
+     *
+     *           1 谁负责阻止：
+     *               事件对象 -- 就是把当次发生的事件当成一个对象
+     *
+     *               获取事件对象：
+     *
+     *                   2.1 在事件的处理程序中，传一个形参
+     *                       如果使用on的方式在ie8里面，传入形参是得不到事件对象的
+     *
+     *                   2.2 在ie8里面，可以通过另一个方式完成获取的操作
+     *
+     *                       window.event
+     *
+     *                   此时发现，不同的浏览器就需要对事件对象有兼容处理
+     *
+     *                       判断 事件事件对象是不是undefined
+     *                       e = e || window.event
+     *
+     *           2 怎么阻止：
+     *               告诉事件对象要阻止
+     *
+     *                   2.1 事件对象.stopPropagation();
+     *                       该方法在ie8里面不能使用
+     *
+     *                   2.2 事件对象.cancelBubble = true;
+     *
+     *                   兼容处理：
+     *                       判断是不是undefined
+     *
+     *                       if(e.stopPropagation != undefined){
+     *                           e.stopPropagation();
+     *                       }else {
+     *                           e.cancelBubble = true;
+     *                       }
+     *
+     * */
+
+    var yeye = document.querySelector('.yeye');
+    var baba = document.querySelector('.baba');
+    var sunzi = document.querySelector('.sunzi');
+
+    // on 的方式：
+    //    yeye.onclick = function(event){
+    //        console.log(event);
+    //    }
+
+    //    baba.addEventListener('click',function(e){
+    //        console.log(e);
+    //    })
+
+    //    sunzi.attachEvent('onclick',function(e){
+    //        console.log(e);
+    //    })
+
+    //    sunzi.onclick = function(e){
+    //        console.log(window.event);
+    //    }
+
+    //    sunzi.onclick = function(e){
+    //        e = e || window.event;
+    //        console.log(e);
+    //    }
+
+
+    //---------------  以上是测试各个方式获取事件对象
+
+    // ------------ 使用事件对象，完成阻止冒泡
+
+    yeye.onclick = function () {
+        console.log(123);
+    }
+    baba.onclick = function () {
+        console.log(456);
+    }
+    sunzi.onclick = function (e) {
+        e = e || window.event;
+        // 这就是阻止事件冒泡的代码
+//        e.stopPropagation();
+
+        // ie8的阻止事件冒泡
+//        e.cancelBubble = true;
+
+        if (e.stopPropagation != undefined) {
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true;
+        }
+        console.log(789);
+    }
+
+
+</script>
+</body>
+</html>

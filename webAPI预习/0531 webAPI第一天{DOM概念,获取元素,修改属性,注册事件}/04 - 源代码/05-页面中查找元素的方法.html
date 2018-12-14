@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #0a0;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box" class="abc">1</div>
+<div></div>
+<div id="bb"></div>
+<div></div>
+<div>
+    <ul>
+        <li>1</li>
+        <li class="abc">2</li>
+        <li>3</li>
+        <li class="abc">4</li>
+        <li>5</li>
+    </ul>
+</div>
+<!--<div id="box" class="abc">2</div>-->
+<script>
+
+    /*
+    *   根据id查找元素
+    *
+    *       document.getElementById(id)
+    *           id: 对应元素的id
+    *
+    *           返回值：
+    *               是对应id的元素对象,如果没有对应id的元素，返回null
+    *
+    *  根据标签查找元素
+    *
+    *       document.getElementsByTagName(tagName)
+    *           tagName : 要查找的标签的标签名
+    *
+    *           返回值：
+    *               多个元素对象的集合---> 伪数组
+    *               不管页面上有一个还是多个元素，返回的结果都是伪数组
+    *
+    *
+    *           作业： 自己学习element.getElementsByTagName()
+    *
+    *
+    *  根据类名获取元素
+    *
+    *       document.getElementsByClassName(className)
+    *           className ： 对应元素的类名
+    *
+    *           返回值：
+    *               元素对象的伪数组
+    *               无论页面上有多少个元素，都是伪数组
+    *
+    *
+    *           作业：
+    *               自己探索element.getElementsByClassName
+    *
+    *
+    *
+    *     // ------------------------------
+    *
+    *  使用console.log() 输出元素对象的时候，会自动帮你转换成html结构的显示方式
+    *
+    *  如果要查看元素对象的键值对
+    *   建议：
+    *       console.dir();  输出对象的键值对
+    *
+    *       如果想要直接看看元素对象的属性，也是可以直接点出来看的
+    * */
+
+//    var box = document.getElementById("box");
+
+    // 如果得到的结果为null，请验证id是否正确
+//    var box = document.getElementById("box1");
+//    console.log(box);
+//    console.log(box.id);
+//    console.log(box['id']);
+//    console.dir(box);
+
+
+
+    /*
+    *  根据标签名获取元素
+    *
+    * */
+    
+//    var divs = document.getElementsByTagName('div');
+//    var lis = document.getElementsByTagName('li');
+//    var uls = document.getElementsByTagName('ul');
+//
+//    console.log(divs);
+//    console.log(lis);
+//    console.log(uls);
+
+    /*
+    * 根据类名获取元素
+    * */
+
+//    var abc = document.getElementsByClassName('abc');
+//    console.log(abc);
+
+</script>
+</body>
+</html>

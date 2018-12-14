@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .abc {
+            width: 200px;
+            height: 200px;
+            background-color: #0a0;
+        }
+
+        .aaa {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+
+    </style>
+</head>
+<body>
+<!--<div class="abc" style="background-color: red;"></div>-->
+<div class="abc"></div>
+<input type="button" value="修改样式" id="btn"/>
+<script>
+
+    /*
+    *  通过修改元素对象的style属性，可以修改元素的样式
+    *
+    *       style属性获取和修改的是行内样式
+    *
+    *  修改类样式
+    *
+    *       修改的是元素对象的className属性
+    *
+    * */
+
+//    var box = document.querySelector(".abc");
+//    console.log(box.style.backgroundColor);
+
+    document.getElementById("btn").onclick = function(){
+        document.querySelector(".abc").className = "aaa";
+    }
+
+</script>
+</body>
+</html>

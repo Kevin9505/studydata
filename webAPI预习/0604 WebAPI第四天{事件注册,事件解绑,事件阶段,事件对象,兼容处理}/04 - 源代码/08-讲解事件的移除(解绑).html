@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script>
+
+    /*
+    *  注册事件有三个方式
+    *
+    *  移除事件也是对应有三个方式
+    *
+    *       on的方式注册  <------->  事件源.on+事件类型 = null
+    *
+    *
+    *       addEventListener  <------------>  removeEventListener
+    *
+    *               removeEventListener
+    *
+    *               事件源.removeEventLister(事件类型,要移除的函数名);
+    *
+    *
+    *       attachEvent    <---------->     detachEvent
+    *
+    *           事件源.detachEvent("on"+事件类型,函数名);
+    *
+    * */
+
+    var btn = document.getElementById("btn");
+
+    //使用on的移除事件
+//    btn.onclick = function(){
+//        console.log(123);
+//        this.onclick = null;
+//    }
+
+
+//    var fn = function(){
+//        console.log(123);
+//    };
+//    function fn2(){
+//        console.log(456);
+//        this.removeEventListener('click',fn2,false);
+//    }
+//    btn.addEventListener('click',fn,false);
+//    btn.addEventListener('click',fn2,false);
+
+
+    /*
+    *  演示detachEvent
+    * */
+
+
+//    var fn = function(){
+//        console.log(123);
+//    }
+//    function fn2(){
+//        console.log(456);
+//        btn.detachEvent('onclick',fn2);
+//    }
+//    btn.attachEvent('onclick',fn);
+//    btn.attachEvent('onclick',fn2);
+
+
+</script>
+</body>
+</html>

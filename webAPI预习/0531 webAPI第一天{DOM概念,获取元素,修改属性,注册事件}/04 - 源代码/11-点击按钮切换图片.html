@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        div.main {
+            width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main">
+
+    <div class="first">
+        <input type="button" value="美女1" id="btn1"/>
+        <input type="button" value="美女2"  id="btn2"/>
+        <input type="button" value="美女3" id="btn3"/>
+        <input type="button" value="美女4"  id="btn4"/>
+        <input type="button" value="美女5"  id="btn5"/>
+    </div>
+    <div class="second">
+        <img src="images/01.jpg" alt="" id="img"/>
+    </div>
+
+</div>
+<script>
+
+    /*
+    *  点击按钮切换对应的图片
+    * */
+    // 获取元素 -- 总是通过id获取，有时候也是比较麻烦的 --》 根据标签名获取
+    var inputs = document.getElementsByTagName('input');
+//    console.log(inputs);
+    var img = document.getElementById("img");
+    // 注册事件
+    for(var i = 0; i < inputs.length; i++){
+//        console.dir(inputs[i]);
+        inputs[i].index = i;
+        // 注册事件
+        inputs[i].onclick = function(){
+            // 切换图片的路径 -- 路径必须是和每一个按钮对应的
+            // 拼接文件名 ==> 发现  0(索引+1).jpg 就是对应的图片的路径
+//            img.src = 'images/0'+(i+1)+'.jpg';
+
+
+            /*
+            *  如果在循环注册事件的函数里面，是没办法使用循环的i的
+            *  通常的做法是：
+            *       在注册事件之前，把对应的索引，存储到注册事件的元素对象身上
+            *
+            *       在函数里面通过this获取到当前触发事件的对象也就是当初注册事件时的元素对象
+            *       this 就是调用该函数的对象
+            * */
+//            console.log(i);
+//            console.log(this);
+//            console.log(this.index);
+
+            // 根据索引计算出路径
+            var src = "images/0"+(this.index+1)+".jpg";
+            // 修改图片的路径即可
+            img.src = src;
+        }
+    }
+
+
+
+    /*
+    *  问：
+    *       给对象添加属性的过程会不会在循环执行的过程中就已经执行了
+    * */
+//    for(var i = 0; i < inputs.length ; i++){
+//        inputs[i].index = i;
+//    }
+
+
+
+</script>
+</body>
+</html>

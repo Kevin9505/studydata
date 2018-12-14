@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script>
+
+    /*
+    *   注册事件：
+    *       1  on的方式
+    *
+    *           事件源.on+事件类型 = 事件处理程序
+    *
+    *           缺点：
+    *               只能注册一次同类型的事件，如果多次注册，会覆盖
+    *
+    *       2  add Event Listener  添加事件监听
+    *
+    *           注册事件 == 监听事件
+    *
+    *           事件源.addEventListener(事件类型,事件处理程序,false);
+    *
+    *           兼容：
+    *               ie8及以下不支持
+    *
+    *       3  因为 addEventListener 在ie8里面不支持
+    *
+    *           attachEvent
+    *
+    *               事件源.attachEvent("on"+事件类型,处理程序);
+    *
+    *           兼容：
+    *               只有ie5->ie10支持，ie11开始放弃
+    * */
+
+
+
+    /*
+    *  演示  多次注册事件
+    * */
+
+    //获取元素
+//    var btn = document.getElementById("btn");
+//
+//    btn.addEventListener("click",function(){
+//        console.log(123);
+//    },false);
+//
+//    btn.addEventListener("click",function(){
+//        console.log(456);
+//    },false);
+//
+//    btn.addEventListener("click",function(){
+//        console.log(789);
+//    },false);
+
+
+
+    /*
+    * 演示 attachEvent
+    * */
+
+    var btn = document.getElementById("btn");
+
+    btn.attachEvent("onclick",function(){
+        console.log(123);
+    });
+    btn.attachEvent("onclick",function(){
+        console.log(456);
+    });
+    btn.attachEvent("onclick",function(){
+        console.log(789);
+    });
+</script>
+</body>
+</html>

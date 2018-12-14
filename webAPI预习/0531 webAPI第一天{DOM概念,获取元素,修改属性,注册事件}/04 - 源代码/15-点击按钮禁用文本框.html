@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="button" value="禁用" id="btn"/>
+<input type="text" name="" id="txt" />
+<script>
+
+    /*
+    *  点击按钮禁用文本框
+    * */
+    // 获取元素
+    var btn = document.getElementById("btn");
+    var txt = document.getElementById("txt");
+    // 注册事件
+    btn.onclick = function(){
+        //禁用文本框
+        txt.disabled = true;
+//        txt.disabled = 0;
+    }
+    /*
+    *  作业： 用一个按钮控制文本框启用和禁用
+    * */
+</script>
+</body>
+</html>

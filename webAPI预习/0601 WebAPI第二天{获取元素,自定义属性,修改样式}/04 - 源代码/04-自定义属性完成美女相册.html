@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+
+        div.main {
+            width: 600px;
+            margin: 0 auto;
+        }
+        img {
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="main">
+
+    <div class="first">
+        <input data-src="images/01.jpg" type="button" value="美女1" id="btn1"/>
+        <input data-src="images/02.jpg" type="button" value="美女2"  id="btn2"/>
+        <input data-src="images/03.jpg" type="button" value="美女3" id="btn3"/>
+        <input data-src="images/04.jpg" type="button" value="美女4"  id="btn4"/>
+        <input data-src="images/05.jpg" type="button" value="美女5"  id="btn5"/>
+    </div>
+    <div class="second">
+        <img src="images/01.jpg" alt="" id="img"/>
+    </div>
+
+</div>
+
+<script>
+
+    /*
+    *
+    *   昨天的效果是：
+    *       根据索引拼接的路径，如果图片的路径跟索引没关系了，就无法实现
+    *
+    *   解决方案：
+    *       把按钮对应的路径，存储到按钮的自定义属性身上
+    * */
+
+    // 获取元素
+    var btns = document.querySelectorAll('input');
+    var img = document.querySelector("#img");
+    // 注册点击事件
+    for(var i = 0; i < btns.length ; i++){
+        btns[i].onclick = function(){
+//            console.log(this.getAttribute('data-src'));
+            //直接获取自定义属性，修改给图片的路径即可
+            img.src = this.getAttribute('data-src');
+        }
+    }
+
+
+</script>
+</body>
+</html>

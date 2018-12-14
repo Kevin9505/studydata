@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .yeye {
+            width: 400px;
+            height: 400px;
+            background-color: #00aa00;
+        }
+
+        .baba {
+            width: 300px;
+            height: 300px;
+            background-color: #f00;
+        }
+
+        .sunzi {
+            width: 200px;
+            height: 200px;
+            background-color: #00f;
+            position: absolute;
+            left: 500px;
+        }
+    </style>
+</head>
+<body>
+<div class="yeye">
+    <div class="baba">
+        <div class="sunzi"></div>
+    </div>
+</div>
+<script>
+
+    /*
+    *  事件分为3个阶段
+    *   有一个属性，告诉我们，该处理程序在事件的哪个阶段执行
+    *
+    *           事件对象.eventPhase
+    * */
+
+    var yeye = document.querySelector('.yeye');
+    var baba = document.querySelector('.baba');
+    var sunzi = document.querySelector('.sunzi');
+
+    ·yeye.addEventListener('click',function(e){
+        console.log('a');
+        console.log(e.eventPhase);
+    },false);
+    baba.addEventListener('click',function(e){
+        console.log('b');
+        console.log(e.eventPhase);
+    },false);
+    sunzi.addEventListener('click',function(e){
+        console.log('c');
+        console.log(e.eventPhase);
+    },false);
+
+//    yeye.addEventListener('click',function(e){
+//        console.log('a');
+//        console.log(e.eventPhase);
+//    },true);
+//    baba.addEventListener('click',function(e){
+//        console.log('b');
+//        console.log(e.eventPhase);
+//    },true);
+//    sunzi.addEventListener('click',function(e){
+//        console.log('c');
+//        console.log(e.eventPhase);
+//    },true);
+
+
+</script>
+</body>
+</html>

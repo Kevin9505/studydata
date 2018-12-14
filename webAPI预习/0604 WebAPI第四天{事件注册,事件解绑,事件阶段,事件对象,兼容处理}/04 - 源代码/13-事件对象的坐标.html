@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 3000px;
+            background-color: #0a0;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+
+    /*
+    *  涉及到的平面坐标系
+    *
+    *       e.clientX   /   e.clientY
+    *
+    *           可视区域坐标
+    *
+    *           可视区域：
+    *               浏览器用来展示内容的区域
+    *
+    *               值的注意的是：
+    *                   浏览器中的坐标都是向下为正的
+    *
+    *       e.pageX    /   e.pageY
+    *
+    *           页面坐标
+    *
+    *
+    * */
+
+    document.onclick = function(e){
+//        console.log(123);
+        console.log(e);
+    }
+
+</script>
+</body>
+</html>
