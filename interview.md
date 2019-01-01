@@ -1,5 +1,8 @@
 # javaSctipt 数组操作 整理
 
+## es6 数组新增的几个方法 
+` forEach() map()  filter() reduce() some() every() `
+
 ### filter的用法
 filter用于把Array的某些元素过滤掉，然后返回剩下的元素。
 和map()类似，Array的filter()也是接收一个函数。map()不同的是，filter()把传入的函数依次作用于每个元素，
